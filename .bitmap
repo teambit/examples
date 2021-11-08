@@ -21,6 +21,12 @@
         "mainFile": "index.ts",
         "rootDir": "compilation/examples/extensions/my-compiler-sm"
     },
+    "examples/extensions/my-dev-files": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "component/examples/extensions/my-dev-files"
+    },
     "examples/extensions/my-react-no-sm": {
         "scope": "",
         "version": "",
