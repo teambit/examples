@@ -29,6 +29,7 @@
      **/
     "defaultScope": "company.examples"
   },
+  "company.scope/extensions/my-dev-files": {},
   /**
    * main configuration for component dependency resolution.
    **/
