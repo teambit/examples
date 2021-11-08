@@ -1,6 +1,5 @@
 import babel from '@babel/core';
 import fs from 'fs-extra';
-import path from 'path';
 import {
   BuildContext,
   BuiltTaskResult,
@@ -12,9 +11,11 @@ import {
   TranspileFileParams,
   TranspileFileOutput,
 } from '@teambit/compiler';
-import { Capsule } from '@teambit/isolator';
 
-export class MyCompilerSM implements Compiler {
+import { Capsule } from '@teambit/isolator';
+import path from 'path';
+
+export class MyCompilerNoSm implements Compiler {
   distDir = 'dist';
 
   /**
@@ -34,21 +35,19 @@ export class MyCompilerSM implements Compiler {
     return babel.version;
   }
 
-  /**
-   * The Compiler aspect reads the component files, and passes them to 'transpileFile()',
-   * one file's content at a time.
-   * For this reason,'transformSync' API is used and not 'transformFileAsync' (used in 'build()')
-   */
+  /* The 'transformFileAsync' API is used here (not 'transformSync')
+   * because, unlike in Workspace compilation, we only get (form the Builder aspect)
+   * the file path, not its content */
   transpileFile(
     fileContent: string,
-    transpileFileParams: TranspileFileParams
+    options: TranspileFileParams
   ): TranspileFileOutput {
     const supportedExtensions = ['.ts', '.tsx', '.js', '.jsx'];
-    const fileExtension = path.extname(transpileFileParams.filePath);
+    const fileExtension = path.extname(options.filePath);
     if (!supportedExtensions.includes(fileExtension)) {
       return null; // file is not supported
     }
-    if (!this.isFileSupported(transpileFileParams.filePath)) {
+    if (!this.isFileSupported(options.filePath)) {
       return null; // file is not supported
     }
     const result = babel.transformSync(fileContent, { sourceMaps: true });
@@ -56,21 +55,9 @@ export class MyCompilerSM implements Compiler {
       return null;
     }
     const compiledCode = result.code || '';
-    const outputPath = this.replaceFileExtToJs(transpileFileParams.filePath);
-    const mapFilePath = `${outputPath}.map`;
-    const mapFileBasename = path.basename(mapFilePath);
-    const sourceMapContent = result.map;
-    /* Combine together the compiled code with its source map reference */
-    const compiledCodeWithMapRef = sourceMapContent
-      ? `${compiledCode}\n\n//# sourceMappingURL=${mapFileBasename}`
-      : compiledCode;
-    const outputFiles = [{ outputText: compiledCodeWithMapRef, outputPath }];
-    if (sourceMapContent) {
-      outputFiles.push({
-        outputText: JSON.stringify(sourceMapContent),
-        outputPath: mapFilePath,
-      });
-    }
+    const outputPath = this.replaceFileExtToJs(options.filePath);
+    const outputFiles = [{ outputText: compiledCode, outputPath }];
+
     return outputFiles;
   }
 
@@ -105,7 +92,7 @@ export class MyCompilerSM implements Compiler {
       artifacts: [
         {
           generatedBy: this.id,
-          name: 'my compiler with sm output',
+          name: 'compiler output',
           globPatterns: [`${this.distDir}/**`],
         },
       ],
@@ -125,33 +112,26 @@ export class MyCompilerSM implements Compiler {
       sourceFiles.map(async (filePath) => {
         const absoluteFilePath = path.join(capsule.path, filePath);
         try {
-          const result = await this.transpileFilePathAsync(absoluteFilePath);
+          // here we use the transpileFilePathAsync API and not the transformSync because we don't have the file content
+          // only the file paths in the capsules.
+          const result = await this.transpileFilePathAsync(
+            absoluteFilePath,
+            babel
+          );
           if (!result || !result.length) {
             // component files might be ignored by Babel, e.g. scss component.
             return;
           }
           const distPath = this.replaceFileExtToJs(filePath);
-          const distPathMap = `${distPath}.map`;
           await fs.outputFile(
             path.join(capsule.path, this.distDir, distPath),
             result[0].outputText
           );
-          if (result.length > 1) {
-            // we got also the source map, write it.
-            await fs.outputFile(
-              path.join(capsule.path, this.distDir, distPathMap),
-              result[1].outputText
-            );
-          }
         } catch (err: any) {
           componentResult.errors?.push(err);
         }
       })
     );
-  }
-
-  createTask() {
-    return this.compiler.createTask('MyCompilerSM', this);
   }
 
   /**
@@ -163,9 +143,13 @@ export class MyCompilerSM implements Compiler {
     return path.join(this.distDir, fileWithJSExtIfNeeded);
   }
 
+  createTask() {
+    return this.compiler.createTask('MyCompilerSM', this);
+  }
+
   /**
-   * whether babel is able to compile the given path.
-   * used (among others) by Compiler aspect to copy the file to the dists dir if not supported.
+   * Checks if Babel is able to compile the given path.
+   * Used (among others) by Compiler aspect to copy the file to the dists dir if not supported.
    */
   isFileSupported(filePath: string): boolean {
     return (
@@ -176,39 +160,27 @@ export class MyCompilerSM implements Compiler {
     );
   }
 
-  private async transpileFilePathAsync(filePath: string) {
+  private async transpileFilePathAsync(filePath: string, babelModule = babel) {
     if (!this.isFileSupported(filePath)) {
       return null;
     }
-    /* The 'transformFileAsync' API is used here (not 'transformSync')
-     * because, unlike in Workspace compilation, we only get (form the Builder aspect)
-     * the file path, not its content */
 
-    const result = await babel.transformFileAsync(filePath, {
+    const result = await babelModule.transformFileAsync(filePath, {
       sourceMaps: true,
     });
     if (!result || !result.code) {
       return null;
     }
     const outputPath = this.replaceFileExtToJs(path.basename(filePath));
-    const mapFilePath = `${outputPath}.map`;
-    const code = result.code || '';
-    const outputText = result.map
-      ? `${code}\n\n//# sourceMappingURL=${mapFilePath}`
-      : code;
-    const outputFiles = [{ outputText, outputPath }];
-    if (result.map) {
-      outputFiles.push({
-        outputText: JSON.stringify(result.map),
-        outputPath: mapFilePath,
-      });
-    }
+    const compiledCode = result.code || '';
+    const outputFiles = [{ outputText: compiledCode, outputPath }];
+
     return outputFiles;
   }
 
   private replaceFileExtToJs(filePath: string): string {
     if (!this.isFileSupported(filePath)) return filePath;
     const fileExtension = path.extname(filePath);
-    return filePath.replace(new RegExp(`${fileExtension}$`), '.js'); // Makes sure it's the last occurrence
+    return filePath.replace(new RegExp(`${fileExtension}$`), '.js'); // makes sure it's the last occurrence
   }
 }

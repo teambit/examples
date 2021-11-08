@@ -75,7 +75,8 @@
   "teambit.workspace/variants": {
     "{ui/**}": {
       // uncomment the env to use
-      "teambit.react/examples/extensions/my-react-sm": {}
+      // "teambit.react/examples/extensions/my-react-sm": {},
+      "compilation/examples/extensions/my-react-no-sm": {}
       // "teambit.react/react": {}
     },
     "{themes/**}": {

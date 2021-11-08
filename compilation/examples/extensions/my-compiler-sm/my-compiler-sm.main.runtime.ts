@@ -14,7 +14,7 @@ export class MyCompilerSMMain {
     return new MyCompilerSM(MyCompilerSMAspect.id, this.compiler);
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  // Update the (compiled component's) package,json with the compiled main file
   getPackageJsonProps() {
     return {
       main: 'dist/{main}.js',
