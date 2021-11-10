@@ -1,6 +1,6 @@
 # Examples
 
-Examples of using and extending Bit.
+Examples of Bit configs and extensions. 
 
 - [Implementing a compiler (using Babel. no source maps.)](https://github.com/teambit/examples/tree/master/compilation/examples/extensions/my-compiler-no-sm)
 - [Implementing a compiler (using Babel. with source maps.)](https://github.com/teambit/examples/tree/master/compilation/examples/extensions/my-compiler-sm)
