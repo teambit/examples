@@ -3,5 +3,5 @@
 Uses Babel's API to provide compilation in development (in the workspace) and during build (in capsules). Does not ouptut source files.
 
 See also:
-- An Env using this compiler
-- A similar compiler implementation that handles source maps, as well.
+- [An Env using this compiler](https://github.com/teambit/examples/tree/master/compilation/examples/extensions/my-react-no-sm)
+- [A similar compiler implementation that handles source maps, as well.](https://github.com/teambit/examples/tree/master/compilation/examples/extensions/my-react-no-sm)
