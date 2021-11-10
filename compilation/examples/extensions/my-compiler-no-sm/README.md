@@ -4,4 +4,4 @@ Uses Babel's API to provide compilation in development (in the workspace) and du
 
 See also:
 - [An Env using this compiler](https://github.com/teambit/examples/tree/master/compilation/examples/extensions/my-react-no-sm)
-- [A similar compiler implementation that handles source maps, as well.](https://github.com/teambit/examples/tree/master/compilation/examples/extensions/my-react-no-sm)
+- [A similar compiler implementation that handles source maps, as well.](https://github.com/teambit/examples/tree/master/compilation/examples/extensions/my-compiler-sm)
