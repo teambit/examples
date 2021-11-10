@@ -15,18 +15,16 @@ export class MyReactNoSmMain {
 
   static runtime = MainRuntime;
 
-  static async provider([react, envs, MyCompilerSM]: [
+  static async provider([react, envs, myCompilerSM]: [
     ReactMain,
     EnvsMain,
-    MyCompilerNoSmMain,
+    MyCompilerNoSmMain
   ]) {
     // Merge the customized and base Env instances
     const myReactEnv = envs.merge<MyReactNoSm>(
       react.reactEnv,
-      new MyReactNoSm(MyCompilerSM)
+      new MyReactNoSm(myCompilerSM)
     );
-
-    // const templatesReactEnv = envs.compose(react.reactEnv, []);
 
     envs.registerEnv(myReactEnv);
     return new MyReactNoSmMain(myReactEnv);

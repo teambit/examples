@@ -16,8 +16,6 @@ import { Capsule } from '@teambit/isolator';
 import path from 'path';
 
 export class MyCompilerNoSm implements Compiler {
-  distDir = 'dist';
-
   /**
    * Detemines whether unsupported files (such as assets)
    * should be copied by Compiler aspect into the 'dist' directory
@@ -26,7 +24,11 @@ export class MyCompilerNoSm implements Compiler {
 
   displayName = 'Babel';
 
-  constructor(readonly id: string, private compiler: CompilerMain) {}
+  constructor(
+    readonly id: string,
+    readonly distDir,
+    private compiler: CompilerMain
+  ) {}
 
   /* Returns the Babel version being used in this Aspect
    * for example, when running 'bit env <component-id>'
@@ -68,9 +70,9 @@ export class MyCompilerNoSm implements Compiler {
    * The compiler output is used (among other things) for the component package.
    */
   async build(context: BuildContext): Promise<BuiltTaskResult> {
-    /* 'Seeder Capsules' are Component Capsules that are being built,
+    /* 'Seeder Capsules' are Component Capsules that are being built -
      * not their dependencies.
-     * There could be cases where the component depenencies should affect its compilation,
+     * There could be cases where the component dependencies should affect the compilation,
      * but not in this case.
      */
     const capsules = context.capsuleNetwork.seedersCapsules;
@@ -142,6 +144,11 @@ export class MyCompilerNoSm implements Compiler {
     const fileWithJSExtIfNeeded = this.replaceFileExtToJs(srcPath);
     return path.join(this.distDir, fileWithJSExtIfNeeded);
   }
+
+  /* `createTask()` is optional but recommended.
+  Not using it will require consumers of your compiler to use two APIs and have two depndencies
+  to their Envs - your compiler
+  */
 
   createTask() {
     return this.compiler.createTask('MyCompilerSM', this);

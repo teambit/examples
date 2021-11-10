@@ -83,7 +83,7 @@ export class MyCompilerSM implements Compiler {
   async build(context: BuildContext): Promise<BuiltTaskResult> {
     /* 'Seeder Capsules' are Component Capsules that are being built,
      * not their dependencies.
-     * There could be cases where the component depenencies should affect its compilation,
+     * There could be cases where the component dependencies should affect its compilation,
      * but not in this case.
      */
     const capsules = context.capsuleNetwork.seedersCapsules;

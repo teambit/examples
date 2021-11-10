@@ -10,14 +10,20 @@ export class MyCompilerNoSmMain {
 
   static runtime = MainRuntime;
 
+  distDir = 'dist';
+
   createCompiler(): MyCompilerNoSm {
-    return new MyCompilerNoSm(MyCompilerNoSmAspect.id, this.compiler);
+    return new MyCompilerNoSm(
+      MyCompilerNoSmAspect.id,
+      this.distDir,
+      this.compiler
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this
   getPackageJsonProps() {
     return {
-      main: 'dist/{main}.js',
+      main: `${this.distDir}/{main}.js`,
     };
   }
 

@@ -15,7 +15,7 @@ export class MyReactSMMain {
 
   static runtime = MainRuntime;
 
-  static async provider([react, envs, MyCompilerSM]: [
+  static async provider([react, envs, myCompilerSM]: [
     ReactMain,
     EnvsMain,
     MyCompilerSMMain
@@ -23,7 +23,7 @@ export class MyReactSMMain {
     // Merge the customized and base Env instances
     const myReactEnv = envs.merge<MyReactSM>(
       react.reactEnv,
-      new MyReactSM(MyCompilerSM)
+      new MyReactSM(myCompilerSM)
     );
 
     // const templatesReactEnv = envs.compose(react.reactEnv, []);
