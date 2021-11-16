@@ -1,10 +1,6 @@
 import babel from '@babel/core';
 import fs from 'fs-extra';
-import {
-  BuildContext,
-  BuiltTaskResult,
-  ComponentResult,
-} from '@teambit/builder';
+import { BuildContext, BuiltTaskResult, ComponentResult } from '@teambit/builder';
 import {
   Compiler,
   CompilerMain,
@@ -17,7 +13,7 @@ import path from 'path';
 
 export class MyCompilerNoSm implements Compiler {
   /**
-   * Detemines whether unsupported files (such as assets)
+   * Determines whether unsupported files (such as assets)
    * should be copied by Compiler aspect into the 'dist' directory
    */
   shouldCopyNonSupportedFiles = true;
@@ -45,10 +41,7 @@ export class MyCompilerNoSm implements Compiler {
     fileContent: string,
     options: TranspileFileParams
   ): TranspileFileOutput {
-    if (!this.isFileSupported(options.filePath)) {
-      return null; // file is not supported
-    }
-    const result = babel.transformSync(fileContent, { sourceMaps: true });
+    const result = babel.transformSync(fileContent);
     if (!result) {
       return null;
     }
@@ -155,22 +148,12 @@ export class MyCompilerNoSm implements Compiler {
    * Used (among others) by Compiler aspect to copy the file to the dists dir if not supported.
    */
   isFileSupported(filePath: string): boolean {
-    return (
-      filePath.endsWith('.ts') ||
-      filePath.endsWith('.tsx') ||
-      filePath.endsWith('.js') ||
-      filePath.endsWith('.jsx')
-    );
+    const supportedExtensions = ['.ts', '.tsx', '.js', '.jsx'];
+    return supportedExtensions.some(ext => filePath.endsWith(ext));
   }
 
   private async transpileFilePathAsync(filePath: string, babelModule = babel) {
-    if (!this.isFileSupported(filePath)) {
-      return null;
-    }
-
-    const result = await babelModule.transformFileAsync(filePath, {
-      sourceMaps: true,
-    });
+    const result = await babelModule.transformFileAsync(filePath);
     if (!result || !result.code) {
       return null;
     }
