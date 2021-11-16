@@ -46,7 +46,7 @@
         "@teambit/eslint-config-bit-react": "~0.0.367",
         "@teambit/harmony": "0.2.11",
         "@teambit/react.templates.themes.theme": "0.0.4",
-        "@typescript-eslint/eslint-plugin": "4.29.3",
+        // "@typescript-eslint/eslint-plugin": "4.29.3",
         "classnames": "2.3.1",
         "eslint-import-resolver-node": "0.3.6",
         "eslint-plugin-import": "2.22.1",
@@ -78,9 +78,9 @@
   "teambit.workspace/variants": {
     "{ui/**}": {
       // uncomment the env to use
-      // "teambit.compilation/examples/extensions/my-react-sm": {},
-      // "teambit.compilation/examples/extensions/my-react-no-sm": {}
-      "teambit.react/examples/extensions/my-react": {}
+      // "teambit.compilation/examples/extensions/my-react-sm": {}
+      "teambit.compilation/examples/extensions/my-react-no-sm": {}
+      // "teambit.react/examples/extensions/my-react": {}
       // "teambit.react/react": {}
     },
     "{themes/**}": {

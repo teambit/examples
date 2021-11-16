@@ -26,13 +26,14 @@ export class MyCompilerNoSm implements Compiler {
 
   constructor(
     readonly id: string,
-    readonly distDir,
+    readonly distDir: string,
     private compiler: CompilerMain
   ) {}
 
   /* Returns the Babel version being used in this Aspect
    * for example, when running 'bit env <component-id>'
    */
+  // eslint-disable-next-line class-methods-use-this
   version() {
     return babel.version;
   }
@@ -44,11 +45,6 @@ export class MyCompilerNoSm implements Compiler {
     fileContent: string,
     options: TranspileFileParams
   ): TranspileFileOutput {
-    const supportedExtensions = ['.ts', '.tsx', '.js', '.jsx'];
-    const fileExtension = path.extname(options.filePath);
-    if (!supportedExtensions.includes(fileExtension)) {
-      return null; // file is not supported
-    }
     if (!this.isFileSupported(options.filePath)) {
       return null; // file is not supported
     }

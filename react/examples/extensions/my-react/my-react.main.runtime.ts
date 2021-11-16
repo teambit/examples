@@ -22,20 +22,20 @@ export class MyReactMain {
         devServerConfig: [devServerConfigTransformer],
       }),
       react.overrideJestConfig(require.resolve('./jest/jest.config')),
-      react.useTypescript({
-        buildConfig: [
-          (config) => {
-            config.setTarget('ES2015');
-            return config;
-          },
-        ],
-        devConfig: [
-          (config) => {
-            config.setTarget('ES2017');
-            return config;
-          },
-        ],
-      }),
+      // react.useTypescript({
+      //   buildConfig: [
+      //     (config) => {
+      //       config.setTarget('ES2015');
+      //       return config;
+      //     },
+      //   ],
+      //   devConfig: [
+      //     (config) => {
+      //       config.setTarget('ES2017');
+      //       return config;
+      //     },
+      //   ],
+      // }),
       react.useEslint({
         transformers: [
           (config) => {
