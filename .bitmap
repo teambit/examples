@@ -27,6 +27,18 @@
         "mainFile": "index.ts",
         "rootDir": "component/examples/extensions/my-dev-files"
     },
+    "examples/extensions/my-react": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "react/examples/extensions/my-react"
+    },
+    "examples/extensions/my-react-m": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "react/examples/extensions/my-react-m"
+    },
     "examples/extensions/my-react-no-sm": {
         "scope": "",
         "version": "",
@@ -38,6 +50,12 @@
         "version": "",
         "mainFile": "index.ts",
         "rootDir": "compilation/examples/extensions/my-react-sm"
+    },
+    "examples/modules/print-component-name": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "pipelines/examples/modules/print-component-name"
     },
     "ui/heading": {
         "scope": "",

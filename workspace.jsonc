@@ -29,7 +29,6 @@
      **/
     "defaultScope": "company.examples"
   },
-  "teambit.component/examples/extensions/my-dev-files": {},
   /**
    * main configuration for component dependency resolution.
    **/
@@ -40,6 +39,7 @@
     "packageManager": "teambit.dependencies/pnpm",
     "policy": {
       "dependencies": {
+        "@teambit/dependencies.modules.packages-excluder": "0.0.34",
         "@teambit/design.ui.external-link": "0.0.344",
         "@teambit/documenter.theme.theme-compositions": "4.1.1",
         "@teambit/documenter.ui.copy-box": "4.1.1",
@@ -62,10 +62,12 @@
       }
     },
     "packageManagerArgs": [],
+    "devFilePatterns": ["**/*.spec.ts"],
     "strictPeerDependencies": true,
     "installFromBitDevRegistry": true,
     "savePrefix": ""
   },
+  "teambit.component/examples/extensions/my-dev-files": {},
   /**
    * workspace variants allow to set different subsets of configuration for components in your
    * workspace. this is extremely useful for upgrading, aligning and building components with a new
@@ -76,8 +78,9 @@
   "teambit.workspace/variants": {
     "{ui/**}": {
       // uncomment the env to use
-      // "teambit.react/examples/extensions/my-react-sm": {},
-      "compilation/examples/extensions/my-react-no-sm": {}
+      // "teambit.compilation/examples/extensions/my-react-sm": {},
+      // "teambit.compilation/examples/extensions/my-react-no-sm": {}
+      "teambit.react/examples/extensions/my-react": {}
       // "teambit.react/react": {}
     },
     "{themes/**}": {
@@ -100,6 +103,9 @@
     },
     "react": {
       "defaultScope": "teambit.react"
+    },
+    "pipelines": {
+      "defaultScope": "teambit.pipelines"
     }
   }
 }
