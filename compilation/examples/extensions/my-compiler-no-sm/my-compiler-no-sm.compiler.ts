@@ -1,6 +1,10 @@
-import babel from '@babel/core';
+import * as babel from '@babel/core';
 import fs from 'fs-extra';
-import { BuildContext, BuiltTaskResult, ComponentResult } from '@teambit/builder';
+import {
+  BuildContext,
+  BuiltTaskResult,
+  ComponentResult,
+} from '@teambit/builder';
 import {
   Compiler,
   CompilerMain,
@@ -42,10 +46,12 @@ export class MyCompilerNoSm implements Compiler {
     options: TranspileFileParams
   ): TranspileFileOutput {
     const result = babel.transformSync(fileContent);
+    // if the file passed is not supported by the compiler, return null
     if (!result) {
       return null;
     }
     const compiledCode = result.code || '';
+    /* Generate the path to the output file based on the file's  */
     const outputPath = this.replaceFileExtToJs(options.filePath);
     const outputFiles = [{ outputText: compiledCode, outputPath }];
 
@@ -64,6 +70,7 @@ export class MyCompilerNoSm implements Compiler {
      * There could be cases where the component dependencies should affect the compilation,
      * but not in this case.
      */
+    console.log('BUILD STARTED!!!!!!!');
     const capsules = context.capsuleNetwork.seedersCapsules;
     const componentsResults: ComponentResult[] = [];
     await Promise.all(
@@ -76,10 +83,10 @@ export class MyCompilerNoSm implements Compiler {
         componentsResults.push({ ...currentComponentResult });
       })
     );
-
     return {
       /* Sets the files to persist as the Component's artifacts,
        and describes them. */
+
       artifacts: [
         {
           generatedBy: this.id,
@@ -94,10 +101,11 @@ export class MyCompilerNoSm implements Compiler {
   private async buildOneCapsule(
     capsule: Capsule,
     componentResult: ComponentResult
-  ) {
-    const sourceFiles = capsule.component.filesystem.files.map(
+  ): Promise<void> {
+    const sourceFiles: string[] = capsule.component.filesystem.files.map(
       (file) => file.relative
     );
+    console.log('component files', capsule.component.filesystem.files);
     await fs.ensureDir(path.join(capsule.path, this.distDir));
     await Promise.all(
       sourceFiles.map(async (filePath) => {
@@ -126,8 +134,7 @@ export class MyCompilerNoSm implements Compiler {
   }
 
   /**
-   * Given a source file, return its parallel in the dists. e.g. index.ts => dist/index.js.
-   * Needed by aspects such as Pkg to determine the main prop.
+   * Given a source file, returns its parallel in the dists. e.g. index.ts => dist/index.js.
    */
   getDistPathBySrcPath(srcPath: string) {
     const fileWithJSExtIfNeeded = this.replaceFileExtToJs(srcPath);
@@ -149,7 +156,7 @@ export class MyCompilerNoSm implements Compiler {
    */
   isFileSupported(filePath: string): boolean {
     const supportedExtensions = ['.ts', '.tsx', '.js', '.jsx'];
-    return supportedExtensions.some(ext => filePath.endsWith(ext));
+    return supportedExtensions.some((ext) => filePath.endsWith(ext));
   }
 
   private async transpileFilePathAsync(filePath: string, babelModule = babel) {

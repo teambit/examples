@@ -7,28 +7,23 @@ import {
 } from '@teambit/compilation.examples.extensions.my-compiler-no-sm';
 import { MyReactNoSmAspect } from './my-react-no-sm.aspect';
 import { MyReactNoSm } from './my-react-no-sm.env';
-import { CompilerAspect, CompilerMain } from '@teambit/compiler';
-
 
 export class MyReactNoSmMain {
   constructor(readonly myReactEnv: MyReactNoSm) {}
-
-  static dependencies = [ReactAspect, EnvsAspect, MyCompilerNoSmAspect, CompilerAspect];
+  static dependencies = [ReactAspect, EnvsAspect, MyCompilerNoSmAspect];
 
   static runtime = MainRuntime;
 
-  static async provider([react, envs, myCompilerNoSM, compiler]: [
+  static async provider([react, envs, myCompilerNoSM]: [
     ReactMain,
     EnvsMain,
-    MyCompilerNoSmMain,
-    CompilerMain
+    MyCompilerNoSmMain
   ]) {
     // Merge the customized and base Env instances
     const myReactEnv = envs.merge<MyReactNoSm>(
       new MyReactNoSm(myCompilerNoSM),
-      react.reactEnv,
+      react.reactEnv
     );
-
     envs.registerEnv(myReactEnv);
     return new MyReactNoSmMain(myReactEnv);
   }

@@ -26,8 +26,6 @@ export class MyReactSMMain {
       new MyReactSM(myCompilerSM)
     );
 
-    // const templatesReactEnv = envs.compose(react.reactEnv, []);
-
     envs.registerEnv(myReactEnv);
     return new MyReactSMMain(myReactEnv);
   }

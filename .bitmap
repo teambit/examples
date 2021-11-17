@@ -60,7 +60,7 @@
     "ui/heading": {
         "scope": "",
         "version": "",
-        "mainFile": "index.ts",
+        "mainFile": "index.js",
         "rootDir": "demo/ui/heading"
     },
     "ui/text": {
