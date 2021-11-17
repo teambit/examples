@@ -57,6 +57,12 @@
         "mainFile": "index.ts",
         "rootDir": "pipelines/examples/modules/print-component-name"
     },
+    "modules/say-hello": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.js",
+        "rootDir": "demo/modules/say-hello"
+    },
     "ui/heading": {
         "scope": "",
         "version": "",

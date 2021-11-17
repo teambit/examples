@@ -70,7 +70,6 @@ export class MyCompilerNoSm implements Compiler {
      * There could be cases where the component dependencies should affect the compilation,
      * but not in this case.
      */
-    console.log('BUILD STARTED!!!!!!!');
     const capsules = context.capsuleNetwork.seedersCapsules;
     const componentsResults: ComponentResult[] = [];
     await Promise.all(
@@ -102,17 +101,17 @@ export class MyCompilerNoSm implements Compiler {
     capsule: Capsule,
     componentResult: ComponentResult
   ): Promise<void> {
-    const sourceFiles: string[] = capsule.component.filesystem.files.map(
-      (file) => file.relative
-    );
-    console.log('component files', capsule.component.filesystem.files);
-    await fs.ensureDir(path.join(capsule.path, this.distDir));
+    // Retrieve the component's file names and extensions
+    const sourceFiles = capsule.component.filesystem.files.map((file) => {
+      console.log('file relative', file.relative);
+      return file.relative;
+    });
+    // await fs.ensureDir(path.join(capsule.path, this.distDir));
     await Promise.all(
       sourceFiles.map(async (filePath) => {
+        // Generate a full path to the file to be compiled
         const absoluteFilePath = path.join(capsule.path, filePath);
         try {
-          // here we use the transpileFilePathAsync API and not the transformSync because we don't have the file content
-          // only the file paths in the capsules.
           const result = await this.transpileFilePathAsync(
             absoluteFilePath,
             babel
@@ -160,7 +159,10 @@ export class MyCompilerNoSm implements Compiler {
   }
 
   private async transpileFilePathAsync(filePath: string, babelModule = babel) {
+    // Use transpileFilePathAsync API (and not the transformSync) to compile a file (from the component capsule) and not the file's content
     const result = await babelModule.transformFileAsync(filePath);
+    // Babel will not return a result for unspooprted files
+    // In that case, not need to
     if (!result || !result.code) {
       return null;
     }

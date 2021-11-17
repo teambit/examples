@@ -77,7 +77,7 @@
    * see https://harmony-docs.bit.dev/aspects/variants for more info.
    **/
   "teambit.workspace/variants": {
-    "{ui/heading/*}": {
+    "{modules/**}": {
       // uncomment the env to use
       // "teambit.compilation/examples/extensions/my-react-sm": {}
       "teambit.compilation/examples/extensions/my-react-no-sm": {}
