@@ -11,8 +11,6 @@ import {
   TranspileFileParams,
   TranspileFileOutput,
 } from '@teambit/compiler';
-
-import { Capsule } from '@teambit/isolator';
 import path from 'path';
 
 export class MyCompilerNoSm implements Compiler {
@@ -65,21 +63,30 @@ export class MyCompilerNoSm implements Compiler {
      * but not in this case.
      */
     const capsules = context.capsuleNetwork.seedersCapsules;
-    const componentsResults: ComponentResult[] = [];
-    await Promise.all(
-      capsules.map(async (capsule) => {
-        const currentComponentResult: ComponentResult = {
-          errors: [],
-          component: capsule.component,
-        };
-        await this.buildCapsule(capsule, currentComponentResult);
-        componentsResults.push({ ...currentComponentResult });
+    const componentsResults = await Promise.all(capsules.map(async (capsule) => {
+      // Retrieve the component's file names and extensions
+      const errors: Error[] = [];
+      const sourceFiles = capsule.component.filesystem.files.map((file) => file.relative);
+      const supportedFiles = sourceFiles.filter(sourceFile => this.isFileSupported(sourceFile));
+      await Promise.all(supportedFiles.map(async (filePath) => {
+        // Generate a full path to the file to be compiled
+        const absoluteFilePath = path.join(capsule.path, filePath);
+        try {
+          // Use transpileFilePathAsync API (and not the transformSync) to compile a file (from the component capsule) and not the file's content
+          const result = await babel.transformFileAsync(absoluteFilePath);
+          const compiledCode = result?.code || '';
+          const distPath = this.replaceFileExtToJs(filePath);
+          await fs.outputFile(path.join(capsule.path, this.distDir, distPath), compiledCode);
+        } catch (err: any) {
+          errors.push(err);
+        }
+      }));
+      return { component: capsule.component, errors } as ComponentResult;
       })
     );
     return {
-      /* Sets the files to persist as the Component's artifacts,
-       and describes them. */
-
+      // Sets the files to persist as the Component's artifacts,
+      // and describes them.
       artifacts: [
         {
           generatedBy: this.id,
@@ -91,40 +98,6 @@ export class MyCompilerNoSm implements Compiler {
     };
   }
 
-  private async buildCapsule(
-    capsule: Capsule,
-    componentResult: ComponentResult
-  ): Promise<void> {
-    // Retrieve the component's file names and extensions
-    const sourceFiles = capsule.component.filesystem.files.map((file) => {
-      return file.relative;
-    });
-    // await fs.ensureDir(path.join(capsule.path, this.distDir));
-    await Promise.all(
-      sourceFiles.map(async (filePath) => {
-        // Generate a full path to the file to be compiled
-        const absoluteFilePath = path.join(capsule.path, filePath);
-        try {
-          const result = await this.transpileFilePathAsync(
-            absoluteFilePath,
-            babel
-          );
-          if (!result || !result.length) {
-            // component files might be ignored by Babel, e.g. scss component.
-            return;
-          }
-          const distPath = this.replaceFileExtToJs(filePath);
-          await fs.outputFile(
-            path.join(capsule.path, this.distDir, distPath),
-            result[0].outputText
-          );
-        } catch (err: any) {
-          componentResult.errors?.push(err);
-        }
-      })
-    );
-  }
-
   /**
    * Given a source file, returns its parallel in the dists. e.g. index.ts => dist/index.js.
    */
@@ -133,11 +106,11 @@ export class MyCompilerNoSm implements Compiler {
     return path.join(this.distDir, fileWithJSExtIfNeeded);
   }
 
-  /* `createTask()` is optional but recommended.
-  Not using it will require consumers of your compiler to use two APIs and have two depndencies
-  to their Envs - your compiler
-  */
-
+  /**
+   * `createTask()` is optional but recommended.
+   * Not using it will require consumers of your compiler to use two APIs and have two dependencies
+   * to their Envs - your compiler
+   */
   createTask() {
     return this.compiler.createTask('MyCompilerSM', this);
   }
@@ -149,20 +122,6 @@ export class MyCompilerNoSm implements Compiler {
   isFileSupported(filePath: string): boolean {
     const supportedExtensions = ['.js', '.jsx'];
     return supportedExtensions.some((ext) => filePath.endsWith(ext));
-  }
-
-  private async transpileFilePathAsync(filePath: string, babelModule = babel) {
-    // Use transpileFilePathAsync API (and not the transformSync) to compile a file (from the component capsule) and not the file's content
-    if (!this.isFileSupported(filePath)) {
-      return null;
-    }
-
-    const result = await babelModule.transformFileAsync(filePath);
-    const outputPath = this.replaceFileExtToJs(path.basename(filePath));
-    const compiledCode = result.code || '';
-    const outputFiles = [{ outputText: compiledCode, outputPath }];
-
-    return outputFiles;
   }
 
   private replaceFileExtToJs(filePath: string): string {

@@ -63,17 +63,5 @@
         "mainFile": "index.js",
         "rootDir": "demo/modules/say-hello"
     },
-    "ui/heading": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.js",
-        "rootDir": "demo/ui/heading"
-    },
-    "ui/text": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "demo/ui/text"
-    },
     "$schema-version": "14.9.0"
 }
