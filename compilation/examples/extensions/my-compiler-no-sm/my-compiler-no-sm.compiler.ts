@@ -50,12 +50,10 @@ export class MyCompilerNoSm implements Compiler {
     if (!result) {
       return null;
     }
-    const compiledCode = result.code || '';
+    const compiledContent: string = result.code || '';
     /* Generate the path to the output file based on the file's  */
-    const outputPath = this.replaceFileExtToJs(options.filePath);
-    const outputFiles = [{ outputText: compiledCode, outputPath }];
-
-    return outputFiles;
+    const compiledFilename = this.replaceFileExtToJs(options.filePath);
+    return [{ outputText: compiledContent, outputPath: compiledFilename }];
   }
 
   /**
@@ -161,11 +159,6 @@ export class MyCompilerNoSm implements Compiler {
   private async transpileFilePathAsync(filePath: string, babelModule = babel) {
     // Use transpileFilePathAsync API (and not the transformSync) to compile a file (from the component capsule) and not the file's content
     const result = await babelModule.transformFileAsync(filePath);
-    // Babel will not return a result for unspooprted files
-    // In that case, not need to
-    if (!result || !result.code) {
-      return null;
-    }
     const outputPath = this.replaceFileExtToJs(path.basename(filePath));
     const compiledCode = result.code || '';
     const outputFiles = [{ outputText: compiledCode, outputPath }];
