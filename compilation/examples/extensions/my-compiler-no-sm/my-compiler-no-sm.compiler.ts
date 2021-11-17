@@ -46,10 +46,6 @@ export class MyCompilerNoSm implements Compiler {
     options: TranspileFileParams
   ): TranspileFileOutput {
     const result = babel.transformSync(fileContent);
-    // if the file passed is not supported by the compiler, return null
-    if (!result) {
-      return null;
-    }
     const compiledContent: string = result.code || '';
     /* Generate the path to the output file based on the file's  */
     const compiledFilename = this.replaceFileExtToJs(options.filePath);
@@ -76,7 +72,7 @@ export class MyCompilerNoSm implements Compiler {
           errors: [],
           component: capsule.component,
         };
-        await this.buildOneCapsule(capsule, currentComponentResult);
+        await this.buildCapsule(capsule, currentComponentResult);
         componentsResults.push({ ...currentComponentResult });
       })
     );
@@ -95,13 +91,12 @@ export class MyCompilerNoSm implements Compiler {
     };
   }
 
-  private async buildOneCapsule(
+  private async buildCapsule(
     capsule: Capsule,
     componentResult: ComponentResult
   ): Promise<void> {
     // Retrieve the component's file names and extensions
     const sourceFiles = capsule.component.filesystem.files.map((file) => {
-      console.log('file relative', file.relative);
       return file.relative;
     });
     // await fs.ensureDir(path.join(capsule.path, this.distDir));
@@ -152,12 +147,16 @@ export class MyCompilerNoSm implements Compiler {
    * Used (among others) by Compiler aspect to copy the file to the dists dir if not supported.
    */
   isFileSupported(filePath: string): boolean {
-    const supportedExtensions = ['.ts', '.tsx', '.js', '.jsx'];
+    const supportedExtensions = ['.js', '.jsx'];
     return supportedExtensions.some((ext) => filePath.endsWith(ext));
   }
 
   private async transpileFilePathAsync(filePath: string, babelModule = babel) {
     // Use transpileFilePathAsync API (and not the transformSync) to compile a file (from the component capsule) and not the file's content
+    if (!this.isFileSupported(filePath)) {
+      return null;
+    }
+
     const result = await babelModule.transformFileAsync(filePath);
     const outputPath = this.replaceFileExtToJs(path.basename(filePath));
     const compiledCode = result.code || '';
