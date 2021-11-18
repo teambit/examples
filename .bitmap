@@ -9,6 +9,12 @@
  */
 
 {
+    "examples/extensions/babel-compiler": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "compilation/examples/extensions/babel-compiler"
+    },
     "examples/extensions/my-compiler-no-sm": {
         "scope": "",
         "version": "",
