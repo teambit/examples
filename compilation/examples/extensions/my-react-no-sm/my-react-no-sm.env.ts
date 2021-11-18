@@ -1,18 +1,18 @@
 import { CompilerEnv, BuilderEnv } from '@teambit/envs';
-import { MyCompilerNoSmMain } from '@teambit/compilation.examples.extensions.my-compiler-no-sm';
+import { BabelCompilerMain } from '@teambit/compilation.examples.extensions.babel-compiler';
 
 // The Env class should only implement the services it overrides
 export class MyReactNoSm implements CompilerEnv, BuilderEnv {
-  constructor(private myCompilerNoSm: MyCompilerNoSmMain) {}
+  constructor(private babelCompiler: BabelCompilerMain) {}
 
-  myCompiler = this.myCompilerNoSm.createCompiler();
+  myBabelCompiler = this.babelCompiler.createCompiler();
 
   getCompiler() {
-    return this.myCompiler;
+    return this.myBabelCompiler;
   }
 
   // eslint-disable-next-line class-methods-use-this
   getBuildPipe() {
-    return [this.myCompiler.createTask()];
+    return [this.myBabelCompiler.createTask()];
   }
 }

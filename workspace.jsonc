@@ -79,8 +79,7 @@
   "teambit.workspace/variants": {
     "{modules/**}": {
       // uncomment the env to use
-      // "teambit.compilation/examples/extensions/my-react-sm": {}
-      "teambit.compilation/examples/extensions/babel-compiler": {}
+      "teambit.compilation/examples/extensions/my-react-no-sm": {}
       // "teambit.react/examples/extensions/my-react": {}
       // "teambit.react/react": {}
     },
