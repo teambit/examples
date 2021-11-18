@@ -15,12 +15,6 @@
         "mainFile": "index.ts",
         "rootDir": "compilation/examples/extensions/babel-compiler"
     },
-    "examples/extensions/my-compiler-no-sm": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "compilation/examples/extensions/my-compiler-no-sm"
-    },
     "examples/extensions/my-compiler-sm": {
         "scope": "",
         "version": "",
