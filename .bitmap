@@ -59,7 +59,7 @@
     },
     "modules/say-hello": {
         "scope": "",
-        "version": "",
+        "version": "0.0.1",
         "mainFile": "index.js",
         "rootDir": "demo/modules/say-hello"
     },

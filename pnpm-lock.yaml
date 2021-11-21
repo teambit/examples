@@ -59,6 +59,9 @@ importers:
       '@types/react-dom': registry.npmjs.org/@types/react-dom/17.0.11
       '@types/testing-library__jest-dom': registry.npmjs.org/@types/testing-library__jest-dom/5.9.5
 
+  compilation/examples/extensions/babel-compiler:
+    specifiers: {}
+
   compilation/examples/extensions/my-compiler-no-sm:
     specifiers: {}
 
@@ -81,6 +84,9 @@ importers:
     specifiers: {}
 
   demo/modules/hello-world:
+    specifiers: {}
+
+  demo/modules/say-hello:
     specifiers: {}
 
   demo/pages/welcome:
