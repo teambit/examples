@@ -9,59 +9,29 @@
  */
 
 {
-    "examples/extensions/babel-compiler": {
+    "demo-modules/say-hello": {
         "scope": "",
         "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "compilation/examples/extensions/babel-compiler"
-    },
-    "examples/extensions/my-compiler-sm": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "compilation/examples/extensions/my-compiler-sm"
-    },
-    "examples/extensions/my-dev-files": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "component/examples/extensions/my-dev-files"
-    },
-    "examples/extensions/my-react": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "react/examples/extensions/my-react"
-    },
-    "examples/extensions/my-react-m": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "react/examples/extensions/my-react-m"
-    },
-    "examples/extensions/my-react-no-sm": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "compilation/examples/extensions/my-react-no-sm"
-    },
-    "examples/extensions/my-react-sm": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "compilation/examples/extensions/my-react-sm"
-    },
-    "examples/modules/print-component-name": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "pipelines/examples/modules/print-component-name"
-    },
-    "modules/say-hello": {
-        "scope": "",
-        "version": "0.0.1",
         "mainFile": "index.js",
-        "rootDir": "demo/modules/say-hello"
+        "rootDir": "demo/demo-modules/say-hello"
+    },
+    "examples/aspects/babel-compiler": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "compilation/examples/aspects/babel-compiler"
+    },
+    "examples/aspects/my-dev-files": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "component/examples/aspects/my-dev-files"
+    },
+    "examples/aspects/my-react-babel": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "compilation/examples/aspects/my-react-babel"
     },
     "$schema-version": "14.9.0"
 }
