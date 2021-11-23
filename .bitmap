@@ -9,9 +9,15 @@
  */
 
 {
+    "demo-modules/simple": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "demo/demo-modules/simple"
+    },
     "demo-ui/heading": {
         "scope": "",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.js",
         "rootDir": "demo/demo-ui/heading"
     },
