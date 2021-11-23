@@ -33,5 +33,17 @@
         "mainFile": "index.ts",
         "rootDir": "compilation/examples/aspects/my-react-babel"
     },
+    "examples/aspects/my-react-lines-counter": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "pipelines/examples/aspects/my-react-lines-counter"
+    },
+    "examples/modules/component-lines-counter": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "pipelines/examples/modules/component-lines-counter"
+    },
     "$schema-version": "14.9.0"
 }

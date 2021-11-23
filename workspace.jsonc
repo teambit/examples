@@ -1,15 +1,12 @@
 {
   "$schema": "https://static.bit.dev/teambit/schemas/schema.json",
-
   // "teambit.component/examples/extensions/my-dev-files": {},
   "teambit.workspace/workspace": {
     "name": "Examples",
-
     "icon": "https://static.bit.dev/bit-logo.svg",
     "defaultDirectory": "{scope}/{name}",
     "defaultScope": "company.examples"
   },
-
   "teambit.dependencies/dependency-resolver": {
     "packageManager": "teambit.dependencies/pnpm",
     "policy": {
@@ -29,6 +26,7 @@
         "eslint-plugin-jsx-a11y": "6.4.1",
         "eslint-plugin-mdx": "1.15.0",
         "eslint-plugin-react": "7.25.1",
+        "file-lines-count": "1.0.1",
         "fs-extra": "10.0.0"
       },
       "peerDependencies": {
@@ -38,7 +36,9 @@
       }
     },
     "packageManagerArgs": [],
-    "devFilePatterns": ["**/*.spec.ts"],
+    "devFilePatterns": [
+      "**/*.spec.ts"
+    ],
     "strictPeerDependencies": true,
     "installFromBitDevRegistry": true,
     "savePrefix": ""
@@ -46,7 +46,8 @@
   "teambit.workspace/variants": {
     "{demo-modules/**}": {
       // uncomment the env to use
-      "teambit.compilation/examples/aspects/my-react-babel": {}
+      // "teambit.compilation/examples/aspects/my-react-babel": {}
+      "teambit.compilation/examples/aspects/my-react-lines-counter": {}
       // "teambit.react/react": {}
     },
     "{themes/**}": {
