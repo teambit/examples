@@ -59,7 +59,6 @@ export class ComponentLinesCounter implements BuildTask {
           output[statsKey] += stats[statsKey];
         }
       } catch (err: any) {
-        console.log(err);
         errors.push(err);
       }
     }
@@ -70,7 +69,7 @@ export class ComponentLinesCounter implements BuildTask {
     try {
       await fs.writeFile(
         path.join(capsule.path, this.outputFileName),
-        JSON.stringify(output)
+        JSON.stringify(output, undefined, 4)
       );
     } catch (err: any) {
       errors.push(err);

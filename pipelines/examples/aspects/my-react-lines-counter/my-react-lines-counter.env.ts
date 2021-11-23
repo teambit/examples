@@ -1,15 +1,15 @@
 import { BuilderEnv } from '@teambit/envs';
-import { BuildTask } from '@teambit/builder';
+import { ReactEnv } from '@teambit/react';
 import { ComponentLinesCounter } from '@teambit/pipelines.examples.modules.component-lines-counter';
 import { MyReactLinesCounterAspect } from './my-react-lines-counter.aspect';
 
 // The Env class should only implement the services it overrides
 export class MyReactLinesCounter implements BuilderEnv {
-  constructor(private reactPipeline: BuildTask[]) {}
+  constructor(private reactEnv: ReactEnv) {}
 
   getBuildPipe() {
     return [
-      ...this.reactPipeline,
+      ...this.reactEnv.getBuildPipe(),
       new ComponentLinesCounter(MyReactLinesCounterAspect.id),
     ];
   }

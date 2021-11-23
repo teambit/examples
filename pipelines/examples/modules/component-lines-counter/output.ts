@@ -1,4 +1,4 @@
-export let output = {
+export const output = {
   total: 0,
   source: 0,
   comment: 0,
