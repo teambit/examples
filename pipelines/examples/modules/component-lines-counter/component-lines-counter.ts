@@ -5,7 +5,7 @@ import {
   ComponentResult,
 } from '@teambit/builder';
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs-extra';
 import linesCount from 'file-lines-count';
 
 export class ComponentLinesCounter implements BuildTask {
@@ -15,27 +15,23 @@ export class ComponentLinesCounter implements BuildTask {
 
   async execute(context: BuildContext): Promise<BuiltTaskResult> {
     const capsules = context.capsuleNetwork.seedersCapsules;
-    let componentsResults: ComponentResult[] = [];
-
-    capsules.forEach(async (capsule) => {
-      let errors: Error[] = [];
-      const outputFileContent = await getComponentLinesCountReport(capsule);
-
-      try {
-        fs.writeFileSync(
-          path.join(capsule.path, 'count.txt'),
-          outputFileContent
+    const componentsResults = await Promise.all(
+      capsules.map(async (capsule) => {
+        let errors: Error[] = [];
+        const outputFileContent = await this.getComponentLinesCountReport(
+          capsule
         );
-      } catch (err: any) {
-        errors.push(err);
-      }
-
-      componentsResults.push({
-        component: capsule.component,
-        metadata: { errors },
-      });
-    });
-
+        try {
+          await fs.outputFile(
+            path.join(capsule.path, 'count.txt'),
+            outputFileContent
+          );
+        } catch (err: any) {
+          errors.push(err);
+        }
+        return { component: capsule.component, errors } as ComponentResult;
+      })
+    );
     return {
       // Sets the files to persist as the Component's artifacts,
       // and describes them.
@@ -49,15 +45,15 @@ export class ComponentLinesCounter implements BuildTask {
       componentsResults,
     };
   }
-}
 
-async function getComponentLinesCountReport(capsule) {
-  const files = capsule.component.filesystem.files;
-  let FileContent = '';
-  for (const file of files) {
-    const filePath = path.join(capsule.path, file.path);
-    const numOfLines = await linesCount(filePath);
-    FileContent += `* ${file.path} has ${numOfLines} lines.\n`;
+  private async getComponentLinesCountReport(capsule) {
+    const files = capsule.component.filesystem.files;
+    let FileContent = '';
+    for (const file of files) {
+      const filePath = path.join(capsule.path, file.path);
+      const numOfLines = await linesCount(filePath);
+      FileContent += `* ${file.path} has ${numOfLines} lines.\n`;
+    }
+    return FileContent;
   }
-  return FileContent;
 }
