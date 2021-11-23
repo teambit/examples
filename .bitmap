@@ -17,7 +17,7 @@
     },
     "demo-ui/heading": {
         "scope": "",
-        "version": "0.0.3",
+        "version": "0.0.1",
         "mainFile": "index.js",
         "rootDir": "demo/demo-ui/heading"
     },
@@ -26,6 +26,12 @@
         "version": "",
         "mainFile": "index.ts",
         "rootDir": "compilation/examples/aspects/babel-compiler"
+    },
+    "examples/aspects/my-artifacts": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "pipelines/examples/aspects/my-artifacts"
     },
     "examples/aspects/my-dev-files": {
         "scope": "",
@@ -39,17 +45,17 @@
         "mainFile": "index.ts",
         "rootDir": "compilation/examples/aspects/my-react-babel"
     },
-    "examples/aspects/my-react-lines-counter": {
+    "examples/aspects/react-loc-stats": {
         "scope": "",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "pipelines/examples/aspects/my-react-lines-counter"
+        "rootDir": "pipelines/examples/aspects/react-loc-stats"
     },
-    "examples/modules/component-lines-counter": {
+    "examples/modules/loc-stats": {
         "scope": "",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "pipelines/examples/modules/component-lines-counter"
+        "rootDir": "pipelines/examples/modules/loc-stats"
     },
     "$schema-version": "14.9.0"
 }

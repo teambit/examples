@@ -46,7 +46,7 @@
     "{demo-ui/**}": {
       // uncomment the env to use
       // "teambit.compilation/examples/aspects/my-react-babel": {}
-      "teambit.compilation/examples/aspects/my-react-lines-counter": {}
+      "teambit.pipelines/examples/aspects/react-loc-stats": {}
       // "teambit.react/react": {}
     },
     "{themes/**}": {

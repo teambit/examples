@@ -4,21 +4,21 @@ import {
   BuiltTaskResult,
   ComponentResult,
 } from '@teambit/builder';
+import { Capsule } from '@teambit/isolator';
 import path from 'path';
 import { promises as fs } from 'fs';
 import sloc from 'sloc';
 import { output } from './output';
 
-export class ComponentLinesCounter implements BuildTask {
+export class LocStats implements BuildTask {
   constructor(readonly aspectId: string) {}
 
-  readonly name = 'ComponentLinesCounter';
+  readonly name = 'ComponentLocStats';
 
   private outputFileName = 'loc-stats.json';
 
   async execute(context: BuildContext): Promise<BuiltTaskResult> {
     const errors: Error[] = [];
-
     const capsules = context.capsuleNetwork.seedersCapsules;
 
     const componentsResults = await Promise.all(
@@ -41,7 +41,7 @@ export class ComponentLinesCounter implements BuildTask {
     };
   }
 
-  private async getComponentLocReport(capsule: any, errors: Error[]) {
+  private async getComponentLocReport(capsule: Capsule, errors: Error[]) {
     const files = capsule.component.filesystem.files;
     const supportedFiles = files.filter((file) =>
       ['ts', 'js', 'jsx', 'tsx', 'css', 'scss'].some((ext) =>
