@@ -9,11 +9,11 @@
  */
 
 {
-    "demo-modules/say-hello": {
+    "demo-ui/heading": {
         "scope": "",
-        "version": "",
+        "version": "0.0.1",
         "mainFile": "index.js",
-        "rootDir": "demo/demo-modules/say-hello"
+        "rootDir": "demo/demo-ui/heading"
     },
     "examples/aspects/babel-compiler": {
         "scope": "",
@@ -35,13 +35,13 @@
     },
     "examples/aspects/my-react-lines-counter": {
         "scope": "",
-        "version": "",
+        "version": "0.0.1",
         "mainFile": "index.ts",
         "rootDir": "pipelines/examples/aspects/my-react-lines-counter"
     },
     "examples/modules/component-lines-counter": {
         "scope": "",
-        "version": "",
+        "version": "0.0.1",
         "mainFile": "index.ts",
         "rootDir": "pipelines/examples/modules/component-lines-counter"
     },

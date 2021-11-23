@@ -11,9 +11,10 @@ export class MyReactLinesCounterMain {
   static runtime = MainRuntime;
 
   static async provider([react, envs]: [ReactMain, EnvsMain]) {
+    const reactPipeline = react.reactEnv.getBuildPipe();
     // Merge the customized and base Env instances
     const myReactEnv = envs.merge<MyReactLinesCounter>(
-      new MyReactLinesCounter(),
+      new MyReactLinesCounter(reactPipeline),
       react.reactEnv
     );
     envs.registerEnv(myReactEnv);

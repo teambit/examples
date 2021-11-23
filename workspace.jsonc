@@ -36,15 +36,13 @@
       }
     },
     "packageManagerArgs": [],
-    "devFilePatterns": [
-      "**/*.spec.ts"
-    ],
+    "devFilePatterns": ["**/*.spec.ts"],
     "strictPeerDependencies": true,
     "installFromBitDevRegistry": true,
     "savePrefix": ""
   },
   "teambit.workspace/variants": {
-    "{demo-modules/**}": {
+    "{demo-ui/**}": {
       // uncomment the env to use
       // "teambit.compilation/examples/aspects/my-react-babel": {}
       "teambit.compilation/examples/aspects/my-react-lines-counter": {}
@@ -55,9 +53,6 @@
     },
     "{examples/demo-modules/**}": {
       "teambit.harmony/node": {}
-    },
-    "{examples/demo-ui/**}": {
-      "teambit.react/react": {}
     },
     "{examples/aspects/**}": {
       "teambit.harmony/aspect": {}

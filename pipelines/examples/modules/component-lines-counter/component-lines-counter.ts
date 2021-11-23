@@ -19,7 +19,7 @@ export class ComponentLinesCounter implements BuildTask {
 
     capsules.forEach(async (capsule) => {
       let errors: Error[] = [];
-      const outputFileContent = await getFileLinesCountReport(capsule);
+      const outputFileContent = await getComponentLinesCountReport(capsule);
 
       try {
         fs.writeFileSync(
@@ -42,7 +42,7 @@ export class ComponentLinesCounter implements BuildTask {
       artifacts: [
         {
           generatedBy: this.aspectId,
-          name: 'lines counter output',
+          name: this.name,
           globPatterns: ['count.txt'],
         },
       ],
@@ -51,7 +51,7 @@ export class ComponentLinesCounter implements BuildTask {
   }
 }
 
-async function getFileLinesCountReport(capsule) {
+async function getComponentLinesCountReport(capsule) {
   const files = capsule.component.filesystem.files;
   let FileContent = '';
   for (const file of files) {
