@@ -27,6 +27,12 @@
         "mainFile": "index.ts",
         "rootDir": "pipelines/examples/aspects/aspect-loc-stats"
     },
+    "examples/aspects/aspect-my-task": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "pipelines/examples/aspects/aspect-my-task"
+    },
     "examples/aspects/babel-compiler": {
         "scope": "",
         "version": "",
@@ -62,6 +68,12 @@
         "version": "0.0.1",
         "mainFile": "index.ts",
         "rootDir": "pipelines/examples/modules/loc-stats"
+    },
+    "examples/modules/my-task": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "pipelines/examples/modules/my-task"
     },
     "$schema-version": "14.9.0"
 }
