@@ -1,6 +1,5 @@
 {
   "$schema": "https://static.bit.dev/teambit/schemas/schema.json",
-  // "teambit.component/examples/extensions/my-dev-files": {},
   "teambit.workspace/workspace": {
     "name": "Examples",
     "icon": "https://static.bit.dev/bit-logo.svg",
@@ -8,6 +7,7 @@
     "defaultScope": "company.examples"
   },
   // "teambit.pipelines/examples/aspects/aspect-loc-stats": {},
+  // "teambit.component/examples/extensions/my-dev-files": {},
   "teambit.pipelines/examples/aspects/aspect-my-task": {},
   "teambit.dependencies/dependency-resolver": {
     "packageManager": "teambit.dependencies/pnpm",

@@ -32,7 +32,7 @@ export class MyTask implements BuildTask {
           path.join(capsuleDir, 'output.my-artifact.txt'),
           artifactContent
         );
-      } catch (err) {
+      } catch (err: any) {
         errors.push(err);
       }
       componentsResults.push({ component: capsule.component, errors });
