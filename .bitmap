@@ -21,6 +21,12 @@
         "mainFile": "index.js",
         "rootDir": "demo/demo-ui/heading"
     },
+    "examples/aspects/aspect-loc-stats": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "pipelines/examples/aspects/aspect-loc-stats"
+    },
     "examples/aspects/babel-compiler": {
         "scope": "",
         "version": "",
