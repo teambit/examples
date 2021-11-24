@@ -15,9 +15,7 @@ export class MyTask implements BuildTask {
     // Prepare the component results array which will be used to report back the components proccessed
     // as well as any additional data regarding this build task execution
     const componentsResults: ComponentResult[] = [];
-    // The 'seeder capsules' as are the capsules for components that are intentionally being built.
-    // Other capsules in the build context are needed for the build proccess of those components intentionally being built -
-    // in most cases, they are irrelevant.
+    // In most cases, only the 'seeder capsules' are the ones relevant for your build
     const capsules = context.capsuleNetwork.seedersCapsules;
     capsules.forEach((capsule) => {
       // Preprate an 'errors' array to report back of any erros during execution (this will be part of the 'Component Results' data)
