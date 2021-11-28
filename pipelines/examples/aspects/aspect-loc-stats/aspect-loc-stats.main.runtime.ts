@@ -14,7 +14,9 @@ export class AspectLocStatsMain {
     BuilderMain,
     GraphqlMain
   ]) {
+    // @ts-ignore
     builder.registerBuildTasks([new LocStats(AspectLocStatsAspect.id)]);
+    // @ts-ignore
     graphql.register(locStatsSchema(builder));
     return new AspectLocStatsMain();
   }
