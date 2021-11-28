@@ -3,13 +3,14 @@ import { UIRuntime } from '@teambit/ui';
 import {
   ComponentUI,
   ComponentAspect,
-  ComponentContext,
+  // ComponentContext,
 } from '@teambit/component';
+import { useQuery } from '@apollo/client';
 import { AspectLocStatsAspect } from './aspect-loc-stats.aspect';
 
 const MyComp = () => {
-  const component = useContext(ComponentContext);
-  return <div>compoennt package {component.packageName}</div>;
+  // const component = useContext(ComponentContext);
+  return <div>...</div>;
 };
 
 export class AspectLocStatsUI {
@@ -18,11 +19,11 @@ export class AspectLocStatsUI {
   static async provider([component]: [ComponentUI]) {
     component.registerRoute({
       children: <MyComp />,
-      path: '~component-name',
+      path: '~toc',
     });
     component.registerNavigation({
-      href: '~component-name',
-      children: 'Component Name',
+      href: '~toc',
+      children: 'TOC',
     });
     return new AspectLocStatsUI();
   }

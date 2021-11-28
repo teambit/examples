@@ -14,6 +14,7 @@
     "packageManager": "teambit.dependencies/pnpm",
     "policy": {
       "dependencies": {
+        "@apollo/client": "3.3.6",
         "@babel/core": "7.16.0",
         "@teambit/dependencies.modules.packages-excluder": "0.0.34",
         "@teambit/design.ui.external-link": "0.0.344",
