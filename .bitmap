@@ -15,11 +15,17 @@
         "mainFile": "index.ts",
         "rootDir": "demo/demo-modules/simple"
     },
-    "demo-ui/heading": {
+    "demo-ui/something": {
         "scope": "",
         "version": "0.0.1",
-        "mainFile": "index.js",
-        "rootDir": "demo/demo-ui/heading"
+        "mainFile": "index.ts",
+        "rootDir": "examples/demo-ui/something"
+    },
+    "demo-ui/text": {
+        "scope": "",
+        "version": "0.0.1",
+        "mainFile": "index.ts",
+        "rootDir": "examples/demo-ui/text"
     },
     "examples/aspects/aspect-loc-stats": {
         "scope": "teambit.pipelines",
@@ -39,11 +45,11 @@
         "mainFile": "index.ts",
         "rootDir": "compilation/examples/aspects/babel-compiler"
     },
-    "examples/aspects/my-artifacts": {
+    "examples/aspects/my-artifacts-fetcher": {
         "scope": "",
-        "version": "",
+        "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "pipelines/examples/aspects/my-artifacts"
+        "rootDir": "pipelines/examples/aspects/my-artifacts-fetcher"
     },
     "examples/aspects/my-dev-files": {
         "scope": "teambit.component",
