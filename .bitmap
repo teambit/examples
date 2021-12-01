@@ -17,7 +17,7 @@
     },
     "demo-ui/something": {
         "scope": "",
-        "version": "0.0.1",
+        "version": "",
         "mainFile": "index.ts",
         "rootDir": "examples/demo-ui/something"
     },
@@ -44,6 +44,18 @@
         "version": "0.0.1",
         "mainFile": "index.ts",
         "rootDir": "compilation/examples/aspects/babel-compiler"
+    },
+    "examples/aspects/custom-env": {
+        "scope": "",
+        "version": "0.0.1",
+        "mainFile": "index.ts",
+        "rootDir": "envs/examples/aspects/custom-env"
+    },
+    "examples/aspects/ext-react": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "react/examples/aspects/ext-react"
     },
     "examples/aspects/my-artifacts-fetcher": {
         "scope": "",
