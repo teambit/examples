@@ -2,18 +2,19 @@ import { MainRuntime } from '@teambit/cli';
 import { ReactAspect, ReactMain } from '@teambit/react';
 import { EnvsAspect, EnvsMain } from '@teambit/envs';
 import { BabelAspect, BabelMain } from '@teambit/babel';
-import { CompilerAspect } from '@teambit/compiler';
+import { CompilerAspect, CompilerMain } from '@teambit/compiler';
 import { babelConfig } from './babel/babel.config';
 import { ExtReactAspect } from './ext-react.aspect';
 
 export class ExtReactMain {
-  static dependencies = [ReactAspect, EnvsAspect, BabelAspect];
+  static dependencies = [ReactAspect, EnvsAspect, CompilerAspect, BabelAspect];
 
   static runtime = MainRuntime;
 
-  static async provider([react, envs, babel]: [
+  static async provider([react, envs, compiler, babel]: [
     ReactMain,
     EnvsMain,
+    CompilerMain,
     BabelMain
   ]) {
     const babelCompiler = babel.createCompiler({
@@ -35,13 +36,14 @@ export class ExtReactMain {
       };
     };
 
+    const compilerBuildTask = [
+      compiler.createTask('BabelCompiler', babelCompiler),
+      ...basicBuildPipelineWithoutCompilation,
+    ];
+
     const overrideObj = {
-      getDependencies: () => dependencies,
       getCompiler: () => babelCompiler,
-      getBuilder: () => [
-        react.reactEnv.getBuildPipe,
-        ...basicBuildPipelineWithoutCompilation,
-      ],
+      getBuildPipe: () => compilerBuildTask,
     };
 
     const compilerTransformer = envs.override(overrideObj);

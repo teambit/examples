@@ -36,7 +36,6 @@ export class CustomEnv implements CompilerEnv, BuilderEnv, DependenciesEnv {
       devDependencies: {
         react: '-',
         'react-dom': '-',
-        '@types/mocha': '-',
         '@types/node': '12.20.4',
         '@types/react': '^17.0.8',
         '@types/react-dom': '^17.0.5',
