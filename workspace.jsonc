@@ -6,7 +6,7 @@
     "defaultDirectory": "{scope}/{name}",
     "defaultScope": "company.examples"
   },
-  "teambit.pipelines/examples/aspects/aspect-loc-stats": {},
+  // "teambit.pipelines/examples/aspects/aspect-loc-stats": {},
   // "teambit.component/examples/extensions/my-dev-files": {},
   // "teambit.pipelines/examples/aspects/aspect-my-task": {},
   // "teambit.pipelines/examples/aspects/my-artifacts-fetcher": {},
@@ -16,6 +16,10 @@
       "dependencies": {
         "@apollo/client": "3.3.6",
         "@babel/core": "7.16.0",
+        "@babel/plugin-proposal-class-properties": "7.16.0",
+        "@babel/preset-env": "7.16.4",
+        "@babel/preset-react": "7.16.0",
+        "@babel/preset-typescript": "7.16.0",
         "@teambit/dependencies.modules.packages-excluder": "0.0.34",
         "@teambit/design.ui.external-link": "0.0.344",
         "@teambit/documenter.theme.theme-compositions": "4.1.1",
@@ -35,8 +39,8 @@
         "sloc": "0.2.1"
       },
       "peerDependencies": {
-        "graphql": "14.7.0",
         "@testing-library/react": "12.0.0",
+        "graphql": "14.7.0",
         "react": "17.0.2",
         "react-dom": "17.0.2"
       }
@@ -49,8 +53,11 @@
   },
   "teambit.workspace/variants": {
     "{demo-ui/**}": {
+      // "teambit.envs/examples/aspects/custom-env": {}
+      // "teambit.react/examples/aspects/ts-config": {},
       // "teambit.compilation/examples/aspects/my-react-babel": {}
       // "teambit.pipelines/examples/aspects/react-loc-stats": {}
+      // "teambit.react/examples/aspects/ext-react": {}
       "teambit.react/react": {}
     },
     "{themes/**}": {
@@ -73,6 +80,15 @@
     },
     "pipelines": {
       "defaultScope": "teambit.pipelines"
+    },
+    "typescript": {
+      "defaultScope": "teambit.typescript"
+    },
+    "envs": {
+      "defaultScope": "teambit.envs"
+    },
+    "harmony": {
+      "defaultScope": "teambit.harmony"
     }
   }
 }

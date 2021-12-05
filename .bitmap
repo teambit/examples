@@ -15,23 +15,11 @@
         "mainFile": "index.ts",
         "rootDir": "demo/demo-modules/simple"
     },
-    "demo-ui/something": {
+    "examples/apsects/loc-stats": {
         "scope": "",
-        "version": "0.0.1",
+        "version": "",
         "mainFile": "index.ts",
-        "rootDir": "examples/demo-ui/something"
-    },
-    "demo-ui/text": {
-        "scope": "",
-        "version": "0.0.1",
-        "mainFile": "index.ts",
-        "rootDir": "examples/demo-ui/text"
-    },
-    "examples/aspects/aspect-loc-stats": {
-        "scope": "teambit.pipelines",
-        "version": "0.0.1",
-        "mainFile": "index.ts",
-        "rootDir": "pipelines/examples/aspects/aspect-loc-stats"
+        "rootDir": "harmony/examples/aspects/loc-stats"
     },
     "examples/aspects/aspect-my-task": {
         "scope": "",
@@ -44,6 +32,18 @@
         "version": "0.0.1",
         "mainFile": "index.ts",
         "rootDir": "compilation/examples/aspects/babel-compiler"
+    },
+    "examples/aspects/custom-env": {
+        "scope": "",
+        "version": "0.0.1",
+        "mainFile": "index.ts",
+        "rootDir": "envs/examples/aspects/custom-env"
+    },
+    "examples/aspects/ext-react": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "react/examples/aspects/ext-react"
     },
     "examples/aspects/my-artifacts-fetcher": {
         "scope": "",
