@@ -6,27 +6,27 @@ import {
   // ComponentContext,
 } from '@teambit/component';
 import { useQuery } from '@apollo/client';
-import { AspectLocStatsAspect } from './aspect-loc-stats.aspect';
+import { LocStatsAspect } from './loc-stats.aspect';
 
 const MyComp = () => {
   // const component = useContext(ComponentContext);
   return <div>...</div>;
 };
 
-export class AspectLocStatsUI {
+export class LocStatsUI {
   static dependencies = [ComponentAspect];
   static runtime = UIRuntime;
   static async provider([component]: [ComponentUI]) {
     component.registerRoute({
       children: <MyComp />,
-      path: '~toc',
+      path: '~loc',
     });
     component.registerNavigation({
-      href: '~toc',
-      children: 'TOC',
+      href: '~loc',
+      children: 'LOC Stats',
     });
-    return new AspectLocStatsUI();
+    return new LocStatsUI();
   }
 }
 
-AspectLocStatsAspect.addRuntime(AspectLocStatsUI);
+LocStatsAspect.addRuntime(LocStatsUI);

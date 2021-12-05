@@ -4,30 +4,26 @@ import { BuilderMain, BuilderAspect } from '@teambit/builder';
 import { ScopeMain, ScopeAspect } from '@teambit/scope';
 import { LocStats } from '@teambit/pipelines.examples.modules.loc-stats';
 import { ComponentAspect, ComponentMain } from '@teambit/component';
-import { locStatsSchema } from './aspect-loc-stats.graphql';
-import { AspectLocStatsAspect } from './aspect-loc-stats.aspect';
+import { locStatsSchema } from './loc-stats.graphql';
+import { LocStatsAspect } from './loc-stats.aspect';
 
-export class AspectLocStatsMain {
+export class LocStatsMain {
   static dependencies = [
-    ScopeAspect,
     BuilderAspect,
     GraphqlAspect,
-    ComponentAspect,
   ];
   static runtime = MainRuntime;
-  static async provider([scope, builder, graphql, component]: [
-    ScopeMain,
+  static async provider([builder, graphql]: [
     BuilderMain,
     GraphqlMain,
-    ComponentMain
   ]) {
     // @ts-ignore
-    builder.registerBuildTasks([new LocStats(AspectLocStatsAspect.id)]);
+    builder.registerBuildTasks([new LocStats(LocStatsAspect.id)]);
     // @ts-ignore
     graphql.register(locStatsSchema(builder));
 
-    return new AspectLocStatsMain();
+    return new LocStatsMain();
   }
 }
 
-AspectLocStatsAspect.addRuntime(AspectLocStatsMain);
+LocStatsAspect.addRuntime(LocStatsMain);

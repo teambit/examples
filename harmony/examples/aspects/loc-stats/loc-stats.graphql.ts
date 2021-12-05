@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import { BuilderMain } from '@teambit/builder';
 import { Component } from '@teambit/component';
-import { AspectLocStatsAspect } from './aspect-loc-stats.aspect';
+import { LocStatsAspect } from './loc-stats.aspect';
 
 export function locStatsSchema(builder: BuilderMain): any {
   return {
@@ -28,7 +28,7 @@ export function locStatsSchema(builder: BuilderMain): any {
         locStats: async (component: Component) => {
           const artifactVinyl = await builder.getArtifactsVinylByExtension(
             component,
-            AspectLocStatsAspect.id
+            LocStatsAspect.id
           );
 
           const output = JSON.parse(

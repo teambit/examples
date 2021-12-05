@@ -53,12 +53,12 @@
   },
   "teambit.workspace/variants": {
     "{demo-ui/**}": {
-      "teambit.envs/examples/aspects/custom-env": {}
+      // "teambit.envs/examples/aspects/custom-env": {}
       // "teambit.react/examples/aspects/ts-config": {},
       // "teambit.compilation/examples/aspects/my-react-babel": {}
       // "teambit.pipelines/examples/aspects/react-loc-stats": {}
       // "teambit.react/examples/aspects/ext-react": {}
-      // "teambit.react/react": {}
+      "teambit.react/react": {}
     },
     "{themes/**}": {
       "teambit.react/react": {}
@@ -86,6 +86,9 @@
     },
     "envs": {
       "defaultScope": "teambit.envs"
+    },
+    "harmony": {
+      "defaultScope": "teambit.harmony"
     }
   }
 }
