@@ -45,6 +45,13 @@
         "mainFile": "index.ts",
         "rootDir": "react/examples/aspects/ext-react"
     },
+    "examples/aspects/html-firebase": {
+        "scope": "",
+        "version": "",
+        "defaultScope": "company.apps",
+        "mainFile": "index.ts",
+        "rootDir": "apps/examples/aspects/html-firebase"
+    },
     "examples/aspects/my-artifacts-fetcher": {
         "scope": "",
         "version": "0.0.1",
