@@ -109,3 +109,6 @@ dist
 .DS_Store
 
 .vscode/
+
+# firebase
+firebase-key.json
