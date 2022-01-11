@@ -1,13 +1,13 @@
 import React, { ReactNode } from 'react';
 
-export type CompyProps = {
+export type MyComponentProps = {
   /**
    * a node to be rendered in the special component.
    */
   children?: ReactNode;
 };
 
-export function Compy({ children }: CompyProps) {
+export function MyComponent({ children }: MyComponentProps) {
   return (
     <div>
       {children}

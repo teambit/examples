@@ -33,7 +33,7 @@
   align-items: center;
   justify-content: center;
   background: radial-gradient(#000000, #000000, #030303);
-  animation: jittery 2s infinite;
+  animation: jittery 4s infinite;
 }
 
 @keyframes jittery {

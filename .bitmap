@@ -27,13 +27,6 @@
         "mainFile": "index.ts",
         "rootDir": "demo/demo-modules/simple"
     },
-    "demo-ui/compy": {
-        "scope": "",
-        "version": "2ed85b71e6618fc2e69b12f097773e5513f8c88c",
-        "defaultScope": "company.demo",
-        "mainFile": "index.ts",
-        "rootDir": "demo/demo-ui/compy"
-    },
     "demo-ui/my-react-component": {
         "scope": "",
         "version": "",
@@ -113,11 +106,23 @@
         "mainFile": "index.ts",
         "rootDir": "pipelines/examples/modules/my-task"
     },
+    "examples/my-component": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.ts",
+        "rootDir": "examples/examples/my-component"
+    },
     "examples/ui/plain-js-app": {
         "scope": "",
         "version": "0.0.1",
         "mainFile": "index.js",
-        "rootDir": "apps/examples/ui/plain-js-app"
+        "rootDir": "apps/examples/ui/plain-js-app",
+        "config": {
+            "teambit.html/html": {},
+            "teambit.envs/envs": {
+                "env": "teambit.html/html"
+            }
+        }
     },
     "$schema-version": "14.9.0"
 }
