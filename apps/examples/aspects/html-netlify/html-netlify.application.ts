@@ -1,3 +1,4 @@
+import path from 'path';
 import { Application, AppContext } from '@teambit/application';
 import { DevServerContext, BundlerContext } from '@teambit/bundler';
 import { WebpackMain, WebpackConfigTransformer } from '@teambit/webpack';
@@ -5,8 +6,8 @@ import { Port } from '@teambit/toolbox.network.get-port';
 import { Capsule } from '@teambit/isolator';
 import { ArtifactDefinition, BuildContext } from '@teambit/builder';
 import { AppBuildResult } from '@teambit/application';
-import path from 'path';
 import webpackDevConfig from './webpack/webpack.dev.config';
+import webpackProdConfig from './webpack/webpack.prod.config';
 
 export class HtmlNetlifyApp implements Application {
   constructor(
@@ -34,9 +35,11 @@ export class HtmlNetlifyApp implements Application {
     context: BuildContext,
     capsule: Capsule
   ): Promise<AppBuildResult> {
-    const bundler = this.webpack.createBundler(
+    // 'createPreviewBundler' is used (instead of 'createBundler') to make use of
+    // Webpack's default config for 'preview' (generate html, inject bundle, etc)
+    const bundler = this.webpack.createPreviewBundler(
       this.getBundlerContext(context, capsule),
-      [this.webpackConfigTransformer]
+      [this.createTransformer(webpackProdConfig)]
     );
     const bundlerResults = await bundler.run();
     console.log(
@@ -47,6 +50,7 @@ export class HtmlNetlifyApp implements Application {
     const artifacts: ArtifactDefinition[] = [
       {
         name: 'html-netlify',
+        // 'public' is the default output directory (set in Webpack's default config)
         globPatterns: ['public/**'],
       },
     ];
@@ -56,14 +60,7 @@ export class HtmlNetlifyApp implements Application {
     return appBuildResult;
   }
 
-  a webpack transformer
-  private webpackConfigTransformer: WebpackConfigTransformer = (
-    configMutator
-  ) => {
-    const merged = configMutator.merge([webpackConfig]);
-    return merged;
-  };
-
+  // generate a webpack transformer out of webpack config
   private createTransformer = (webpackConfig): WebpackConfigTransformer => {
     return (configMutator) => {
       const merged = configMutator.merge([webpackConfig]);
