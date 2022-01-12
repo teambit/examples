@@ -12,7 +12,7 @@ export class ReactLocStatsMain {
 
   static async provider([react, envs]: [ReactMain, EnvsMain]) {
     // Merge the customized and base Env instances
-    const myReactEnv = envs.merge<ReactLocStats>(
+    const myReactEnv = envs.merge<ReactLocStats, ReactMain>(
       new ReactLocStats(react.reactEnv),
       react.reactEnv
     );

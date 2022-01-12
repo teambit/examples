@@ -9,24 +9,6 @@
  */
 
 {
-    "demo-html": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "examples/demo-html",
-        "config": {
-            "teambit.html/html": {},
-            "teambit.envs/envs": {
-                "env": "teambit.html/html"
-            }
-        }
-    },
-    "demo-modules/simple": {
-        "scope": "",
-        "version": "4d815e58532cc3d50bfe0d38df0db03385e3b443",
-        "mainFile": "index.ts",
-        "rootDir": "demo/demo-modules/simple"
-    },
     "demo-ui/my-react-component": {
         "scope": "",
         "version": "",
@@ -105,12 +87,6 @@
         "version": "",
         "mainFile": "index.ts",
         "rootDir": "pipelines/examples/modules/my-task"
-    },
-    "examples/my-component": {
-        "scope": "",
-        "version": "",
-        "mainFile": "index.ts",
-        "rootDir": "examples/examples/my-component"
     },
     "examples/ui/plain-js-app": {
         "scope": "",

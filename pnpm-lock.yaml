@@ -18,6 +18,7 @@ importers:
       '@teambit/documenter.ui.copy-box': 4.1.1
       '@teambit/eslint-config-bit-react': ~0.0.367
       '@teambit/harmony': 0.2.11
+      '@teambit/html.modules.render-template': 0.0.95
       '@teambit/react.templates.themes.theme': 0.0.4
       '@teambit/toolbox.network.get-port': 0.0.111
       '@testing-library/react': 12.0.0
@@ -68,6 +69,7 @@ importers:
       '@teambit/documenter.ui.copy-box': registry.npmjs.org/@teambit/documenter.ui.copy-box/4.1.1_react-dom@17.0.2+react@17.0.2
       '@teambit/eslint-config-bit-react': registry.npmjs.org/@teambit/eslint-config-bit-react/0.0.367_42c1a70dd5598d21f152f1cd353fd960
       '@teambit/harmony': registry.npmjs.org/@teambit/harmony/0.2.11
+      '@teambit/html.modules.render-template': registry.npmjs.org/@teambit/html.modules.render-template/0.0.95
       '@teambit/react.templates.themes.theme': 0.0.4_28efb623cb9aaa0b90b285bfbaeaff3c
       '@teambit/toolbox.network.get-port': registry.npmjs.org/@teambit/toolbox.network.get-port/0.0.111
       '@testing-library/react': registry.npmjs.org/@testing-library/react/12.0.0_react-dom@17.0.2+react@17.0.2
@@ -2355,6 +2357,22 @@ packages:
       loud-rejection: registry.npmjs.org/loud-rejection/1.6.0
       reflect-metadata: registry.npmjs.org/reflect-metadata/0.1.13
       user-home: registry.npmjs.org/user-home/2.0.0
+    dev: false
+
+  registry.npmjs.org/@teambit/html.modules.create-element-from-string/0.0.95:
+    resolution: {integrity: sha512-Z2EOL4zXaOsYvD/NQR4WQGldB9WtHPj+ZRAfnp+GyqWo1beh0CGv/N7x6B+WPUkFT0jsQ8pqL63zuau7fAqptQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@teambit/html.modules.create-element-from-string/-/html.modules.create-element-from-string-0.0.95.tgz}
+    name: '@teambit/html.modules.create-element-from-string'
+    version: 0.0.95
+    engines: {node: '>=12.22.0'}
+    dev: false
+
+  registry.npmjs.org/@teambit/html.modules.render-template/0.0.95:
+    resolution: {integrity: sha512-RsG9Dkug0p1UnpyOWDVPCOyMNWNStMvyVMKHbVXGmxgJ6LKB5Z0BRoOqiMTwS3qfLIHAbzWcNXcL4bPt+e90bw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@teambit/html.modules.render-template/-/html.modules.render-template-0.0.95.tgz}
+    name: '@teambit/html.modules.render-template'
+    version: 0.0.95
+    engines: {node: '>=12.22.0'}
+    dependencies:
+      '@teambit/html.modules.create-element-from-string': registry.npmjs.org/@teambit/html.modules.create-element-from-string/0.0.95
     dev: false
 
   registry.npmjs.org/@teambit/legacy-bit-id/0.0.397:

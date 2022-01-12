@@ -20,7 +20,7 @@ export class MyReactBabelMain {
     BabelCompilerMain
   ]) {
     // Merge the customized and base Env instances
-    const myReactEnv = envs.merge<MyReactBabel>(
+    const myReactEnv = envs.merge<MyReactBabel, ReactMain>(
       new MyReactBabel(babelCompiler),
       react.reactEnv
     );

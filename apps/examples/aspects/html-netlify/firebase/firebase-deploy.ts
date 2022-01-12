@@ -37,6 +37,24 @@ export const firebaseDeploy = async () => {
 
   if (fullVersionId) {
   }
+
+  // specify which files to deploy
+
+  // upload files
+
+  // update version to 'finalized'
+
+  //
 };
 
-firebaseDeploy();
+// firebaseDeploy();
+
+// const firebase = new FirebaseDeploy(jwt, SITE_ID)
+
+// firebase.deploy()
+
+// const firebaseConfig = {
+//     jwt,
+//     site_id,
+
+// }

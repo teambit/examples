@@ -6,7 +6,7 @@ import { Port } from '@teambit/toolbox.network.get-port';
 import { Capsule } from '@teambit/isolator';
 import { ArtifactDefinition, BuildContext } from '@teambit/builder';
 import { AppBuildResult } from '@teambit/application';
-import { firebaseDeploy } from './firebase/firebase-deploy';
+// import { firebaseDeploy } from './firebase/firebase-deploy';
 import webpackDevConfig from './webpack/webpack.dev.config';
 import webpackProdConfig from './webpack/webpack.prod.config';
 
@@ -62,7 +62,12 @@ export class HtmlNetlifyApp implements Application {
   }
 
   async deploy(context: DeployContext, capsule: Capsule) {
-    firebaseDeploy();
+    console.log(
+      '🚀 ~ file: html-netlify.application.ts ~ line 65 ~ HtmlNetlifyApp ~ deploy ~ capsule',
+      capsule
+    );
+
+    // firebaseDeploy();
   }
 
   // generate a webpack transformer out of webpack config

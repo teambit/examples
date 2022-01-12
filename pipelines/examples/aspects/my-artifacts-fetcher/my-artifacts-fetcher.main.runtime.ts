@@ -5,6 +5,7 @@ import {
   ComponentMain,
   ComponentAspect,
   ComponentID,
+  Component,
 } from '@teambit/component';
 import { MyArtifactsFetcherAspect } from './my-artifacts-fetcher.aspect';
 
@@ -13,11 +14,11 @@ export class MyArtifactsFetcherMain {
   static dependencies = [ScopeAspect, BuilderAspect];
   static runtime = MainRuntime;
   static async provider([scope, builder]: [ScopeMain, BuilderMain]) {
-    const comp = await scope.get(
+    const comp = (await scope.get(
       ComponentID.fromString(
         'teambit.compilation/examples/aspects/babel-compiler'
       )
-    );
+    )) as Component;
     const art = builder.getArtifacts(comp);
     console.log('>>>> ART', art);
     return new MyArtifactsFetcherMain();

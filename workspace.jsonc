@@ -11,7 +11,7 @@
   // "teambit.pipelines/examples/aspects/aspect-my-task": {},
   // "teambit.pipelines/examples/aspects/my-artifacts-fetcher": {},
   "teambit.apps/examples/aspects/html-netlify": {},
-  "teambit.apps/examples/ui/plain-js-app": {},
+  // "teambit.apps/examples/ui/plain-js-app": {},
   "teambit.dependencies/dependency-resolver": {
     "packageManager": "teambit.dependencies/pnpm",
     "policy": {
@@ -29,6 +29,7 @@
         "@teambit/documenter.ui.copy-box": "4.1.1",
         "@teambit/eslint-config-bit-react": "~0.0.367",
         "@teambit/harmony": "0.2.11",
+        "@teambit/html.modules.render-template": "0.0.95",
         "@teambit/react.templates.themes.theme": "0.0.4",
         "@teambit/toolbox.network.get-port": "0.0.111",
         "@types/gapi": "0.0.41",
@@ -64,9 +65,7 @@
       }
     },
     "packageManagerArgs": [],
-    "devFilePatterns": [
-      "**/*.spec.ts"
-    ],
+    "devFilePatterns": ["**/*.spec.ts"],
     "strictPeerDependencies": true,
     "installFromBitDevRegistry": true,
     "savePrefix": ""
