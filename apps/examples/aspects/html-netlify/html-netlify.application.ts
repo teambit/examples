@@ -1,11 +1,12 @@
 import path from 'path';
-import { Application, AppContext } from '@teambit/application';
+import { Application, AppContext, DeployContext } from '@teambit/application';
 import { DevServerContext, BundlerContext } from '@teambit/bundler';
 import { WebpackMain, WebpackConfigTransformer } from '@teambit/webpack';
 import { Port } from '@teambit/toolbox.network.get-port';
 import { Capsule } from '@teambit/isolator';
 import { ArtifactDefinition, BuildContext } from '@teambit/builder';
 import { AppBuildResult } from '@teambit/application';
+import { firebaseDeploy } from './firebase/firebase-deploy';
 import webpackDevConfig from './webpack/webpack.dev.config';
 import webpackProdConfig from './webpack/webpack.prod.config';
 
@@ -58,6 +59,10 @@ export class HtmlNetlifyApp implements Application {
       artifacts,
     });
     return appBuildResult;
+  }
+
+  async deploy(context: DeployContext, capsule: Capsule) {
+    firebaseDeploy();
   }
 
   // generate a webpack transformer out of webpack config
