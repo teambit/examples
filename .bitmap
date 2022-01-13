@@ -92,13 +92,7 @@
         "scope": "",
         "version": "0.0.1",
         "mainFile": "index.js",
-        "rootDir": "apps/examples/ui/plain-js-app",
-        "config": {
-            "teambit.html/html": {},
-            "teambit.envs/envs": {
-                "env": "teambit.html/html"
-            }
-        }
+        "rootDir": "apps/examples/ui/plain-js-app"
     },
     "$schema-version": "14.9.0"
 }

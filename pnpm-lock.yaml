@@ -41,6 +41,7 @@ importers:
       eslint-plugin-mdx: 1.15.0
       eslint-plugin-react: 7.25.1
       fs-extra: 10.0.0
+      glob: 7.2.0
       googleapis: 92.0.0
       graphql: 14.7.0
       graphql-tag: 2.12.6
@@ -87,6 +88,7 @@ importers:
       eslint-plugin-mdx: registry.npmjs.org/eslint-plugin-mdx/1.15.0
       eslint-plugin-react: registry.npmjs.org/eslint-plugin-react/7.25.1
       fs-extra: registry.npmjs.org/fs-extra/10.0.0
+      glob: registry.npmjs.org/glob/7.2.0
       googleapis: registry.npmjs.org/googleapis/92.0.0
       graphql: registry.npmjs.org/graphql/14.7.0
       graphql-tag: registry.npmjs.org/graphql-tag/2.12.6_graphql@14.7.0
@@ -4807,6 +4809,19 @@ packages:
     resolution: {integrity: sha512-OvD9ENzPLbegENnYP5UUfJIirTg4+XwMWGaQfQTY0JenxNvvIKP3U3/tAQSPIu/lHxXYSZmpXlUHeqAIdKzBLQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/glob/-/glob-7.1.7.tgz}
     name: glob
     version: 7.1.7
+    dependencies:
+      fs.realpath: registry.npmjs.org/fs.realpath/1.0.0
+      inflight: registry.npmjs.org/inflight/1.0.6
+      inherits: registry.npmjs.org/inherits/2.0.4
+      minimatch: registry.npmjs.org/minimatch/3.0.4
+      once: registry.npmjs.org/once/1.4.0
+      path-is-absolute: registry.npmjs.org/path-is-absolute/1.0.1
+    dev: false
+
+  registry.npmjs.org/glob/7.2.0:
+    resolution: {integrity: sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/glob/-/glob-7.2.0.tgz}
+    name: glob
+    version: 7.2.0
     dependencies:
       fs.realpath: registry.npmjs.org/fs.realpath/1.0.0
       inflight: registry.npmjs.org/inflight/1.0.6

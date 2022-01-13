@@ -6,9 +6,11 @@ import { Port } from '@teambit/toolbox.network.get-port';
 import { Capsule } from '@teambit/isolator';
 import { ArtifactDefinition, BuildContext } from '@teambit/builder';
 import { AppBuildResult } from '@teambit/application';
+import glob from 'glob';
 // import { firebaseDeploy } from './firebase/firebase-deploy';
 import webpackDevConfig from './webpack/webpack.dev.config';
 import webpackProdConfig from './webpack/webpack.prod.config';
+import { firebaseDeploy } from './firebase/firebase-deploy';
 
 export class HtmlNetlifyApp implements Application {
   constructor(
@@ -43,10 +45,6 @@ export class HtmlNetlifyApp implements Application {
       [this.createTransformer(webpackProdConfig)]
     );
     const bundlerResults = await bundler.run();
-    console.log(
-      '🚀 ~ file: html-netlify.application.ts ~ line 43 ~ HtmlNetlifyApp ~ bundlerResults',
-      bundlerResults
-    );
 
     const artifacts: ArtifactDefinition[] = [
       {
@@ -62,12 +60,12 @@ export class HtmlNetlifyApp implements Application {
   }
 
   async deploy(context: DeployContext, capsule: Capsule) {
-    console.log(
-      '🚀 ~ file: html-netlify.application.ts ~ line 65 ~ HtmlNetlifyApp ~ deploy ~ capsule',
-      capsule
-    );
-
-    // firebaseDeploy();
+    const publicPath = path.join(capsule.path, 'public');
+    let filePaths = [];
+    glob(`${publicPath}/**`, {}, function (er, files) {
+      filePaths = files;
+    });
+    await firebaseDeploy(filePaths, capsule.path);
   }
 
   // generate a webpack transformer out of webpack config

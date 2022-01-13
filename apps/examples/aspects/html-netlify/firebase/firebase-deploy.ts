@@ -1,14 +1,42 @@
 import axios from 'axios';
+import zlib from 'zlib';
+import fs from 'fs';
 import { getAccessToken } from './firebase-auth';
 
 const SITE_ID = 'html-demo-63a45';
 let fullVersionId = '';
 
-export const firebaseDeploy = async () => {
+export async function firebaseDeploy(filePaths: string[], capsulePath: string) {
   // authorize
   const accessToken = await getAccessToken();
+  const siteVersionName = await createSiteVersion(accessToken);
+  //   if (fullVersionId) {
+  //     // gzip files to upload
+  //     const gzip = zlib.createGzip();
+  //     const filesToUpload = [];
+  //     filePaths.shift();
+  //     filePaths.map((filePath) => {
+  //       const gzippedFilePath = `${filePath}.gz`;
+  //       console.log(
+  //         '🚀 ~ file: firebase-deploy.ts ~ line 49 ~ filePaths.map ~ gzippedFilePath',
+  //         gzippedFilePath
+  //       );
+  //       const input = fs.createReadStream(filePath);
+  //       const output = fs.createWriteStream(gzippedFilePath);
+  //       input.pipe(gzip).pipe(output);
+  //     });
+  //   } else {
+  //     throw 'Site version is missing';
+  //   }
 
-  // create site version
+  // specify which files to deploy
+
+  // upload files
+
+  // update site version to 'finalized'
+}
+
+async function createSiteVersion(accessToken) {
   const data = {
     config: {
       headers: [
@@ -26,35 +54,17 @@ export const firebaseDeploy = async () => {
     headers: { Authorization: `Bearer ${accessToken}` },
   };
 
-  axios
-    .post(
+  try {
+    const response = await axios.post(
       `https://firebasehosting.googleapis.com/v1beta1/sites/${SITE_ID}/versions`,
       data,
       config
-    )
-    .then((res) => (fullVersionId = res.data.name))
-    .catch((err) => console.log(err));
-
-  if (fullVersionId) {
+    );
+    console.log('RESPONSE', response);
+    return response;
+  } catch (err) {
+    console.log(err);
   }
+}
 
-  // specify which files to deploy
-
-  // upload files
-
-  // update version to 'finalized'
-
-  //
-};
-
-// firebaseDeploy();
-
-// const firebase = new FirebaseDeploy(jwt, SITE_ID)
-
-// firebase.deploy()
-
-// const firebaseConfig = {
-//     jwt,
-//     site_id,
-
-// }
+async function compressFiles() {}
