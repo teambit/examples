@@ -1,12 +1,12 @@
 import { MainRuntime } from '@teambit/cli';
-import { HtmlNetlifyAspect } from './html-netlify.aspect';
+import { HtmlAspect } from './html.aspect';
 import { ApplicationAspect, ApplicationMain } from '@teambit/application';
 // import { Workspace, WorkspaceAspect } from '@teambit/workspace';
 import { WebpackMain, WebpackAspect } from '@teambit/webpack';
-import { HtmlNetlifyApp } from './html-netlify.application';
-import { HtmlNetlifyAppType } from './html-netlify.app-type';
+// import { HtmlApp } from './html.application';
+import { HtmlAppType } from './html.app-type';
 
-export class HtmlNetlifyMain {
+export class HtmlMain {
   static slots = [];
   static dependencies = [ApplicationAspect, WebpackAspect];
   static runtime = MainRuntime;
@@ -14,11 +14,9 @@ export class HtmlNetlifyMain {
     ApplicationMain,
     WebpackMain
   ]) {
-    application.registerAppType(
-      new HtmlNetlifyAppType('html-netlify', webpack)
-    );
-    return new HtmlNetlifyMain();
+    application.registerAppType(new HtmlAppType('html-app', webpack));
+    return new HtmlMain();
   }
 }
 
-HtmlNetlifyAspect.addRuntime(HtmlNetlifyMain);
+HtmlAspect.addRuntime(HtmlMain);

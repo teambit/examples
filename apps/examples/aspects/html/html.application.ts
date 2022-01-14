@@ -5,17 +5,15 @@ import { WebpackMain, WebpackConfigTransformer } from '@teambit/webpack';
 import { Port } from '@teambit/toolbox.network.get-port';
 import { Capsule } from '@teambit/isolator';
 import { ArtifactDefinition, BuildContext } from '@teambit/builder';
-import { AppBuildResult } from '@teambit/application';
-import glob from 'glob';
-// import { firebaseDeploy } from './firebase/firebase-deploy';
+import { AppBuildResult, DeployFn } from '@teambit/application';
 import webpackDevConfig from './webpack/webpack.dev.config';
 import webpackProdConfig from './webpack/webpack.prod.config';
-import { firebaseDeploy } from './firebase/firebase-deploy';
 
-export class HtmlNetlifyApp implements Application {
+export class HtmlApp implements Application {
   constructor(
     readonly name: string,
     readonly entry: string[],
+    readonly deploy: DeployFn,
     private webpack: WebpackMain
   ) {}
 
@@ -48,7 +46,7 @@ export class HtmlNetlifyApp implements Application {
 
     const artifacts: ArtifactDefinition[] = [
       {
-        name: 'html-netlify',
+        name: 'html',
         // 'public' is the default output directory (set in Webpack's default config)
         globPatterns: ['public/**'],
       },
@@ -57,15 +55,6 @@ export class HtmlNetlifyApp implements Application {
       artifacts,
     });
     return appBuildResult;
-  }
-
-  async deploy(context: DeployContext, capsule: Capsule) {
-    const publicPath = path.join(capsule.path, 'public');
-    let filePaths = [];
-    glob(`${publicPath}/**`, {}, function (er, files) {
-      filePaths = files;
-    });
-    await firebaseDeploy(filePaths, capsule.path);
   }
 
   // generate a webpack transformer out of webpack config
