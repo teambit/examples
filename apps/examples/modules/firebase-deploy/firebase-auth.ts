@@ -1,6 +1,7 @@
 import { google } from 'googleapis';
 
-export function getAccessToken(key: any): Promise<string> {
+export function getAccessToken(keyString: string): Promise<string> {
+  const key = JSON.parse(keyString);
   const SCOPES = ['https://www.googleapis.com/auth/firebase.hosting'];
   return new Promise(function (resolve, reject) {
     const jwtClient = new google.auth.JWT(

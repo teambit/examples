@@ -14,7 +14,7 @@ const firebaseDeploy = new FirebaseDeploy(KEY, SITE_ID);
 const plainJS: HtmlOptions = {
   name: 'plain-js-app',
   entry: [require.resolve('./plain-js-app.app-root')],
-  deploy: firebaseDeploy.deploy,
+  deploy: firebaseDeploy.deploy.bind(firebaseDeploy),
 };
 
 export default plainJS;

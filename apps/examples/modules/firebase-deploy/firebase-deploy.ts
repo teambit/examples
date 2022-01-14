@@ -1,7 +1,7 @@
 import { DeploymentProvider, DeployContext } from '@teambit/application';
 import { Capsule } from '@teambit/isolator';
-import { glob } from 'glob';
-import { sep, join } from 'path';
+import glob from 'glob';
+import { posix, sep, join } from 'path';
 import { google } from 'googleapis';
 import fs from 'fs';
 import axios from 'axios';
@@ -13,33 +13,63 @@ type FilesToUpload = [
   {
     gZipFile: any;
     gZipFileHash: string;
-    absSourcePathToOriginal: string;
-    absSourcePathToGZip: string;
-    relDestinationPathToGzip: string;
+    absSrcPathToOriginal: string;
+    absSrcPathToGZip: string;
+    relDestPathToGzip: string;
   }
 ];
 
 export class FirebaseDeploy implements DeploymentProvider {
-  constructor(readonly JWT_KEY: any, readonly SITE_ID: string) {}
+  constructor(readonly JWT: string, readonly SITE_ID: string) {}
   readonly publicDir = 'public';
 
   // @ts-ignore
-  deploy(context: DeployContext, capsule: Capsule): Promise<void> {
+  async deploy(context: DeployContext, capsule: Capsule): Promise<void> {
     const filePaths = this.getFilePaths(capsule);
-    const accessToken = getAccessToken(this.JWT_KEY);
-    const siteVersionUrl = this.createSiteVersion(accessToken);
-    const filesToUpload = this.prepareFilesForUpload(filePaths);
+    const filesToUpload = await this.prepareFilesForUpload(filePaths);
+    // const accessToken = await getAccessToken(this.JWT);
+    // const siteVersionUrl = await this.createSiteVersion(accessToken);
   }
 
   private getFilePaths(capsule: Capsule): string[] {
     const publicPath = join(capsule.path, this.publicDir);
-    let filePaths = [];
-    glob(`${publicPath}/**`, {}, function (er, files) {
-      filePaths = files;
-    });
-    // remove item with path to parent directory
-    filePaths.shift();
+    const filePaths = glob.sync(`${publicPath}/**`, { nodir: true });
     return filePaths;
+  }
+
+  private async prepareFilesForUpload(filePaths) {
+    const filesToUpload: FilesToUpload = filePaths.map((filePath) => {
+      const publicDirSection = `${sep}${this.publicDir}${sep}`;
+      const absSrcPathToOriginal = filePath;
+      const absSrcPathToGZip = `${filePath}.gz`;
+      let relDestPathToGzip = absSrcPathToGZip.split(publicDirSection)[1];
+      if (relDestPathToGzip.includes('\\')) {
+        relDestPathToGzip = relDestPathToGzip.split(sep).join(posix.sep);
+      }
+      return {
+        gZipFile: '',
+        gZipFileHash: '',
+        absSrcPathToOriginal,
+        absSrcPathToGZip,
+        relDestPathToGzip,
+      };
+    });
+    console.log('>>> FILES TO UPLOAD: ', filesToUpload);
+    // compress files and generate hashes
+    const gzip = zlib.createGzip();
+    filesToUpload.forEach((file) => {
+      const rs = fs.createReadStream(file.absSrcPathToOriginal);
+      const wr = fs.createWriteStream(file.absSrcPathToGZip);
+      rs.pipe(gzip).pipe(wr);
+      file.gZipFile = fs.readFileSync(file.absSrcPathToGZip, {
+        encoding: 'utf8',
+      });
+      file.gZipFileHash = crypto
+        .createHash('sha256')
+        .update(file.gZipFile)
+        .digest('base64');
+    });
+    console.log('FILES TO UPLOAD W/ GZIP: ', filesToUpload);
   }
 
   private async createSiteVersion(accessToken) {
@@ -66,32 +96,9 @@ export class FirebaseDeploy implements DeploymentProvider {
         data,
         config
       );
-      console.log('RESPONSE', response);
       return response;
     } catch (err) {
       console.log(err);
     }
-  }
-
-  private async prepareFilesForUpload(filePaths) {
-    const filesToUpload: FilesToUpload = filePaths.map((filePath) => {
-      const publicDirSection = `${sep}${this.publicDir}${sep}`;
-      const absSourcePathToOriginal = filePath;
-      const absSourcePathToGZip = `${filePath}.gz`;
-      const relDestinationPathToGzip =
-        absSourcePathToGZip.split(publicDirSection)[1];
-    });
-    // compress files and generate hashes
-    const gzip = zlib.createGzip();
-    filesToUpload.forEach((file) => {
-      const input = fs.createReadStream(file.absSourcePathToOriginal);
-      const output = fs.createWriteStream(file.absSourcePathToGZip);
-      input.pipe(gzip).pipe(output);
-      file.gZipFile = fs.readFileSync(file.absSourcePathToGZip, 'utf8');
-      file.gZipFileHash = crypto
-        .createHash('sha256')
-        .update(file.gZipFile)
-        .digest('base64');
-    });
   }
 }
