@@ -2,7 +2,6 @@ import { DeploymentProvider, DeployContext } from '@teambit/application';
 import { Capsule } from '@teambit/isolator';
 import glob from 'glob';
 import { posix, sep, join } from 'path';
-import { google } from 'googleapis';
 import fs from 'fs';
 import axios, { AxiosInstance } from 'axios';
 import zlib from 'zlib';
