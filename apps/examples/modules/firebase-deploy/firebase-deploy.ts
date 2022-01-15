@@ -19,13 +19,17 @@ export class FirebaseDeploy implements DeploymentProvider {
   async deploy(context: DeployContext, capsule: Capsule): Promise<void> {
     const filePaths = this.getFilePaths(capsule);
     const filesToUpload = await this.prepareFilesForUpload(filePaths);
-    // this.accessToken = await getAccessToken(this.JWT);
-    // this.axiosFb = axios.create({
-    //   headers: { Authorization: `Bearer ${this.accessToken}` },
-    //   baseURL: 'https://firebasehosting.googleapis.com/v1beta1',
-    // });
-    // this.siteVersionUrl = await this.createSiteVersion();
-    this.specifyFilesToUpload(filesToUpload);
+    this.accessToken = await getAccessToken(this.JWT);
+    this.axiosFb = axios.create({
+      headers: { Authorization: `Bearer ${this.accessToken}` },
+    });
+    this.siteVersionUrl = await this.createSiteVersion();
+    const uploadUrl = await this.specifyFilesToUpload(filesToUpload);
+    const res = await this.uploadFiles(filesToUpload, uploadUrl);
+    console.log(
+      '🚀 ~ file: firebase-deploy.ts ~ line 29 ~ FirebaseDeploy ~ deploy ~ res',
+      res
+    );
   }
 
   private getFilePaths(capsule: Capsule): string[] {
@@ -98,7 +102,7 @@ export class FirebaseDeploy implements DeploymentProvider {
 
     try {
       const response = await this.axiosFb.post(
-        `sites/${this.SITE_ID}/versions`,
+        `https://firebasehosting.googleapis.com/v1beta1/sites/${this.SITE_ID}/versions`,
         data
       );
       return response.data.name as string;
@@ -108,22 +112,38 @@ export class FirebaseDeploy implements DeploymentProvider {
   }
 
   private async specifyFilesToUpload(filesToUpload) {
-    const files = filesToUpload.map((fileToUpload) => {
-      const file = {};
-      Object.assign(file, {
+    const files = {};
+    filesToUpload.forEach((fileToUpload) => {
+      Object.assign(files, {
         [fileToUpload.relDestPathToGzip]: fileToUpload.gZipFileHash,
       });
-      return file;
     });
-    console.log('>>> MAPPED FILES: ', files);
-    // try {
-    //   const response = await this.axiosFb.post(
-    //     `${this.siteVersionUrl}:populateFiles`,
-    //     files
-    //   );
-    //   return response.data;
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    const data = { files };
+    try {
+      const response = await this.axiosFb.post(
+        `https://firebasehosting.googleapis.com/v1beta1/${this.siteVersionUrl}:populateFiles`,
+        data
+      );
+      return response.data.uploadUrl as string;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  private async uploadFiles(filesToUpload, uploadUrl) {
+    filesToUpload.forEach(async (file) => {
+      try {
+        const response = await this.axiosFb.post(
+          `${uploadUrl}/${file.gZipFileHash}`,
+          file.gZipFile,
+          {
+            headers: { 'Content-Type': 'application/octet-stream' },
+          }
+        );
+        return response;
+      } catch (err) {
+        console.log(err);
+      }
+    });
   }
 }
