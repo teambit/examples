@@ -57,7 +57,7 @@ export class FirebaseDeploy implements DeploymentProvider {
         const readStream = fs.createReadStream(absSrcPathToOriginal);
         const writeStream = fs.createWriteStream(absSrcPathToGZip);
         readStream.pipe(gzip).pipe(writeStream);
-        const { gZipFile, gZipFileHash } = await this.getFileContent(
+        const { gZipFile, gZipFileHash } = await this.getFileContentAndHash(
           writeStream,
           absSrcPathToGZip
         );
@@ -73,7 +73,7 @@ export class FirebaseDeploy implements DeploymentProvider {
     return filesToUpload;
   }
 
-  private getFileContent(
+  private getFileContentAndHash(
     writeStream: fs.WriteStream,
     filePath: string
   ): Promise<any> {
