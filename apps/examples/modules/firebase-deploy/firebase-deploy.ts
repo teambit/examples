@@ -25,11 +25,9 @@ export class FirebaseDeploy implements DeploymentProvider {
     });
     this.siteVersionUrl = await this.createSiteVersion();
     const uploadUrl = await this.specifyFilesToUpload(filesToUpload);
-    const res = await this.uploadFiles(filesToUpload, uploadUrl);
-    console.log(
-      '🚀 ~ file: firebase-deploy.ts ~ line 29 ~ FirebaseDeploy ~ deploy ~ res',
-      res
-    );
+    const uploadFilesRes = await this.uploadFiles(filesToUpload, uploadUrl);
+    // const finalizeVersionRes = this.finalizeVersion();
+    // const deployVerRes = this.deployVersion();
   }
 
   private getFilePaths(capsule: Capsule): string[] {
@@ -60,6 +58,7 @@ export class FirebaseDeploy implements DeploymentProvider {
         );
         return {
           gZipFile,
+          absSrcPathToGZip,
           gZipFileHash,
           relDestPathToGzip,
         };
@@ -137,7 +136,10 @@ export class FirebaseDeploy implements DeploymentProvider {
           `${uploadUrl}/${file.gZipFileHash}`,
           file.gZipFile,
           {
-            headers: { 'Content-Type': 'application/octet-stream' },
+            headers: {
+              'Content-Type': 'application/octet-stream',
+              'Content-Encoding': 'gzip',
+            },
           }
         );
         return response;
@@ -145,5 +147,30 @@ export class FirebaseDeploy implements DeploymentProvider {
         console.log(err);
       }
     });
+  }
+
+  private async finalizeVersion() {
+    const data = { status: 'FINALIZED' };
+    try {
+      const response = await this.axiosFb.patch(
+        `https://firebasehosting.googleapis.com/v1beta1/${this.siteVersionUrl}?update_mask=status`,
+        data
+      );
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  private async deployVersion() {
+    const versionId = this.siteVersionUrl.split('versions/')[1];
+    try {
+      const response = await this.axiosFb.post(
+        `https://firebasehosting.googleapis.com/v1beta1/sites/${this.SITE_ID}/releases?versionName=sites/${this.SITE_ID}/versions/${versionId}`
+      );
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
