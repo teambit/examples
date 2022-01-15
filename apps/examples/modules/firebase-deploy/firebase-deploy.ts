@@ -43,37 +43,50 @@ export class FirebaseDeploy implements DeploymentProvider {
 
   private async prepareFilesForUpload(filePaths) {
     const gzip = zlib.createGzip();
-    const filesToUpload: FilesToUpload = filePaths.map((filePath) => {
-      const publicDirSection = `${sep}${this.publicDir}${sep}`;
-      const absSrcPathToOriginal = filePath;
-      const absSrcPathToGZip = `${filePath}.gz`;
-      let relDestPathToGzip = `${sep}${
-        absSrcPathToGZip.split(publicDirSection)[1]
-      }`;
-      if (relDestPathToGzip.includes('\\')) {
-        relDestPathToGzip = relDestPathToGzip.split(sep).join(posix.sep);
-      }
-      return {
-        gZipFile: '',
-        gZipFileHash: '',
-        absSrcPathToOriginal,
-        absSrcPathToGZip,
-        relDestPathToGzip,
-      };
-    });
+    const filesToUpload = await Promise.all(
+      filePaths.map(async (filePath) => {
+        const publicDirSection = `${sep}${this.publicDir}${sep}`;
+        const absSrcPathToOriginal = filePath;
+        const absSrcPathToGZip = `${filePath}.gz`;
+        let relDestPathToGzip = `${sep}${
+          absSrcPathToGZip.split(publicDirSection)[1]
+        }`;
+        if (relDestPathToGzip.includes('\\')) {
+          relDestPathToGzip = relDestPathToGzip.split(sep).join(posix.sep);
+        }
+        const readStream = fs.createReadStream(absSrcPathToOriginal);
+        const writeStream = fs.createWriteStream(absSrcPathToGZip);
+        readStream.pipe(gzip).pipe(writeStream);
+        const { gZipFile, gZipFileHash } = await this.getFileContent(
+          writeStream,
+          absSrcPathToGZip
+        );
+        return {
+          gZipFile,
+          gZipFileHash,
+          absSrcPathToOriginal,
+          absSrcPathToGZip,
+          relDestPathToGzip,
+        };
+      })
+    );
+    return filesToUpload;
+  }
 
-    // compress files and generate hashes
-
-    filesToUpload.forEach((file) => {
-      const readStream = fs.createReadStream(file.absSrcPathToOriginal);
-      const writeStream = fs.createWriteStream(file.absSrcPathToGZip);
-      readStream.pipe(gzip).pipe(writeStream);
-      writeStream.on('close', () => {
-        file.gZipFile = fs.readFileSync(file.absSrcPathToGZip);
-        file.gZipFileHash = crypto
+  private getFileContent(
+    writeStream: fs.WriteStream,
+    filePath: string
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      writeStream.on('close', async () => {
+        const gZipFile = await fs.promises.readFile(filePath, {
+          encoding: 'binary',
+        });
+        const gZipFileHash = crypto
           .createHash('sha256')
-          .update(file.gZipFile)
+          .update(gZipFile)
           .digest('hex');
+        resolve({ gZipFile, gZipFileHash });
       });
     });
   }
