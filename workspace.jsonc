@@ -10,7 +10,6 @@
   // "teambit.component/examples/extensions/my-dev-files": {},
   // "teambit.pipelines/examples/aspects/aspect-my-task": {},
   // "teambit.pipelines/examples/aspects/my-artifacts-fetcher": {},
-  "teambit.apps/examples/aspects/html": {},
   "teambit.apps/examples/apps/plain-js-app": {},
   "teambit.dependencies/dependency-resolver": {
     "packageManager": "teambit.dependencies/pnpm",
@@ -51,6 +50,7 @@
         "graphql-tag": "2.12.6",
         "lodash": "4.17.21",
         "minimatch": "3.0.4",
+        "minio": "7.0.26",
         "mocha": "9.1.3",
         "postcss-loader": "6.2.1",
         "resolve-url-loader": "4.0.0",
@@ -66,12 +66,17 @@
       }
     },
     "packageManagerArgs": [],
-    "devFilePatterns": ["**/*.spec.ts"],
+    "devFilePatterns": [
+      "**/*.spec.ts"
+    ],
     "strictPeerDependencies": true,
     "installFromBitDevRegistry": true,
     "savePrefix": ""
   },
   "teambit.workspace/variants": {
+    "{examples/apps/**}": {
+      "teambit.apps/examples/aspects/html": {}
+    },
     "{demo-ui/**}": {
       // "teambit.envs/examples/aspects/custom-env": {}
       // "teambit.react/examples/aspects/ts-config": {},

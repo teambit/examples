@@ -101,5 +101,12 @@
         "mainFile": "index.ts",
         "rootDir": "pipelines/examples/modules/my-task"
     },
+    "examples/modules/s3-deploy": {
+        "scope": "",
+        "version": "",
+        "defaultScope": "company.apps",
+        "mainFile": "index.ts",
+        "rootDir": "apps/examples/modules/s3-deploy"
+    },
     "$schema-version": "14.9.0"
 }

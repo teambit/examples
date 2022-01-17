@@ -8,6 +8,13 @@ import zlib from 'zlib';
 import crypto from 'crypto';
 import { getAccessToken } from './firebase-auth';
 
+type FileToUpload = {
+  gZipFile: Buffer | string;
+  absSrcPathToGZip: string;
+  gZipFileHash: string;
+  relDestPathToGzip: string;
+};
+
 export class FirebaseDeploy implements DeploymentProvider {
   constructor(readonly JWT: string, readonly SITE_ID: string) {}
   readonly publicDir = 'public';
@@ -16,7 +23,7 @@ export class FirebaseDeploy implements DeploymentProvider {
   private siteVersionUrl: string;
   // @ts-ignore
   async deploy(context: DeployContext, capsule: Capsule): Promise<void> {
-    const filePaths = this.getFilePaths(capsule);
+    const filePaths = this.getFilePaths(context);
     const filesToUpload = await this.prepareFilesForUpload(filePaths);
     this.accessToken = await getAccessToken(this.JWT);
     this.axiosFb = axios.create({
@@ -25,19 +32,32 @@ export class FirebaseDeploy implements DeploymentProvider {
     this.siteVersionUrl = await this.createSiteVersion();
     const uploadUrl = await this.specifyFilesToUpload(filesToUpload);
     const uploadFilesRes = await this.uploadFiles(filesToUpload, uploadUrl);
-    // const finalizeVersionRes = this.finalizeVersion();
-    // const deployVerRes = this.deployVersion();
+    const finalizeVersionRes = this.finalizeVersion();
+    const deployVerRes = this.deployVersion();
   }
 
-  private getFilePaths(capsule: Capsule): string[] {
-    const publicPath = join(capsule.path, this.publicDir);
-    const filePaths = glob.sync(`${publicPath}/**`, { nodir: true });
+  private getFilePaths(context: DeployContext): string[] {
+    const artifacts = context.artifactList.toArray();
+    const htmlArtifacts = artifacts.find(
+      (artifact) => artifact.def.name === 'html'
+    );
+    const globPatterns = htmlArtifacts.def.globPatterns;
+    const filePaths = [];
+    globPatterns.forEach((globPattern) => {
+      const paths: string[] = glob.sync(
+        `${htmlArtifacts.rootDir}${globPattern}`,
+        {
+          nodir: true,
+        }
+      );
+      filePaths.concat(paths);
+    });
     return filePaths;
   }
 
   private async prepareFilesForUpload(filePaths) {
     const gzip = zlib.createGzip();
-    const filesToUpload = await Promise.all(
+    const filesToUpload: FileToUpload[] = await Promise.all(
       filePaths.map(async (filePath) => {
         const publicDirSection = `${sep}${this.publicDir}${sep}`;
         const absSrcPathToOriginal = filePath;
@@ -111,7 +131,7 @@ export class FirebaseDeploy implements DeploymentProvider {
 
   private async specifyFilesToUpload(filesToUpload) {
     const files = {};
-    filesToUpload.forEach((fileToUpload) => {
+    filesToUpload.forEach((fileToUpload: FileToUpload) => {
       Object.assign(files, {
         [fileToUpload.relDestPathToGzip]: fileToUpload.gZipFileHash,
       });
@@ -128,9 +148,10 @@ export class FirebaseDeploy implements DeploymentProvider {
     }
   }
 
-  private async uploadFiles(filesToUpload, uploadUrl) {
+  private async uploadFiles(filesToUpload: FileToUpload[], uploadUrl: string) {
     filesToUpload.forEach(async (file) => {
       try {
+        console.log('>>> file.gZipFile', file.gZipFile);
         const response = await this.axiosFb.post(
           `${uploadUrl}/${file.gZipFileHash}`,
           file.gZipFile,
@@ -141,7 +162,7 @@ export class FirebaseDeploy implements DeploymentProvider {
             },
           }
         );
-        return response;
+        console.log('>> upload response: ', response);
       } catch (err) {
         console.log(err);
       }
