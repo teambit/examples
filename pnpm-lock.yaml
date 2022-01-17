@@ -5,6 +5,8 @@ importers:
   .:
     specifiers:
       '@apollo/client': 3.3.6
+      '@aws-sdk/client-s3': 3.47.0
+      '@aws-sdk/credential-provider-ini': 3.47.0
       '@babel/core': 7.16.0
       '@babel/plugin-proposal-class-properties': 7.16.0
       '@babel/preset-env': 7.16.4
@@ -21,6 +23,7 @@ importers:
       '@teambit/html.modules.render-template': 0.0.95
       '@teambit/react.templates.themes.theme': 0.0.4
       '@teambit/toolbox.network.get-port': 0.0.111
+      '@teambit/webpack.modules.config-mutator': 0.0.134
       '@testing-library/react': 12.0.0
       '@types/gapi': 0.0.41
       '@types/jest': 26.0.20
@@ -46,6 +49,7 @@ importers:
       graphql: 14.7.0
       graphql-tag: 2.12.6
       lodash: 4.17.21
+      mime-types: 2.1.34
       minimatch: 3.0.4
       minio: 7.0.26
       mocha: 9.1.3
@@ -58,6 +62,8 @@ importers:
       webpack: 5.65.0
     dependencies:
       '@apollo/client': registry.npmjs.org/@apollo/client/3.3.6_graphql@14.7.0+react@17.0.2
+      '@aws-sdk/client-s3': registry.npmjs.org/@aws-sdk/client-s3/3.47.0
+      '@aws-sdk/credential-provider-ini': registry.npmjs.org/@aws-sdk/credential-provider-ini/3.47.0
       '@babel/core': registry.npmjs.org/@babel/core/7.16.0
       '@babel/plugin-proposal-class-properties': registry.npmjs.org/@babel/plugin-proposal-class-properties/7.16.0_@babel+core@7.16.0
       '@babel/preset-env': registry.npmjs.org/@babel/preset-env/7.16.4_@babel+core@7.16.0
@@ -74,6 +80,7 @@ importers:
       '@teambit/html.modules.render-template': registry.npmjs.org/@teambit/html.modules.render-template/0.0.95
       '@teambit/react.templates.themes.theme': 0.0.4_28efb623cb9aaa0b90b285bfbaeaff3c
       '@teambit/toolbox.network.get-port': registry.npmjs.org/@teambit/toolbox.network.get-port/0.0.111
+      '@teambit/webpack.modules.config-mutator': registry.npmjs.org/@teambit/webpack.modules.config-mutator/0.0.134
       '@testing-library/react': registry.npmjs.org/@testing-library/react/12.0.0_react-dom@17.0.2+react@17.0.2
       '@types/gapi': registry.npmjs.org/@types/gapi/0.0.41
       '@types/mocha': registry.npmjs.org/@types/mocha/9.0.0
@@ -94,6 +101,7 @@ importers:
       graphql: registry.npmjs.org/graphql/14.7.0
       graphql-tag: registry.npmjs.org/graphql-tag/2.12.6_graphql@14.7.0
       lodash: registry.npmjs.org/lodash/4.17.21
+      mime-types: registry.npmjs.org/mime-types/2.1.34
       minimatch: registry.npmjs.org/minimatch/3.0.4
       minio: registry.npmjs.org/minio/7.0.26
       mocha: registry.npmjs.org/mocha/9.1.3
@@ -318,6 +326,966 @@ packages:
       ts-invariant: registry.npmjs.org/ts-invariant/0.6.2
       tslib: registry.npmjs.org/tslib/1.14.1
       zen-observable: registry.npmjs.org/zen-observable/0.8.15
+    dev: false
+
+  registry.npmjs.org/@aws-crypto/crc32/2.0.0:
+    resolution: {integrity: sha512-TvE1r2CUueyXOuHdEigYjIZVesInd9KN+K/TFFNfkkxRThiNxO6i4ZqqAVMoEjAamZZ1AA8WXJkjCz7YShHPQA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-crypto/crc32/-/crc32-2.0.0.tgz}
+    name: '@aws-crypto/crc32'
+    version: 2.0.0
+    dependencies:
+      '@aws-crypto/util': registry.npmjs.org/@aws-crypto/util/2.0.1
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/1.14.1
+    dev: false
+
+  registry.npmjs.org/@aws-crypto/ie11-detection/2.0.0:
+    resolution: {integrity: sha512-pkVXf/dq6PITJ0jzYZ69VhL8VFOFoPZLZqtU/12SGnzYuJOOGNfF41q9GxdI1yqC8R13Rq3jOLKDFpUJFT5eTA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-crypto/ie11-detection/-/ie11-detection-2.0.0.tgz}
+    name: '@aws-crypto/ie11-detection'
+    version: 2.0.0
+    dependencies:
+      tslib: registry.npmjs.org/tslib/1.14.1
+    dev: false
+
+  registry.npmjs.org/@aws-crypto/sha256-browser/2.0.0:
+    resolution: {integrity: sha512-rYXOQ8BFOaqMEHJrLHul/25ckWH6GTJtdLSajhlqGMx0PmSueAuvboCuZCTqEKlxR8CQOwRarxYMZZSYlhRA1A==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-crypto/sha256-browser/-/sha256-browser-2.0.0.tgz}
+    name: '@aws-crypto/sha256-browser'
+    version: 2.0.0
+    dependencies:
+      '@aws-crypto/ie11-detection': registry.npmjs.org/@aws-crypto/ie11-detection/2.0.0
+      '@aws-crypto/sha256-js': registry.npmjs.org/@aws-crypto/sha256-js/2.0.0
+      '@aws-crypto/supports-web-crypto': registry.npmjs.org/@aws-crypto/supports-web-crypto/2.0.0
+      '@aws-crypto/util': registry.npmjs.org/@aws-crypto/util/2.0.1
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-locate-window': registry.npmjs.org/@aws-sdk/util-locate-window/3.47.0
+      '@aws-sdk/util-utf8-browser': registry.npmjs.org/@aws-sdk/util-utf8-browser/3.47.0
+      tslib: registry.npmjs.org/tslib/1.14.1
+    dev: false
+
+  registry.npmjs.org/@aws-crypto/sha256-js/2.0.0:
+    resolution: {integrity: sha512-VZY+mCY4Nmrs5WGfitmNqXzaE873fcIZDu54cbaDaaamsaTOP1DBImV9F4pICc3EHjQXujyE8jig+PFCaew9ig==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-crypto/sha256-js/-/sha256-js-2.0.0.tgz}
+    name: '@aws-crypto/sha256-js'
+    version: 2.0.0
+    dependencies:
+      '@aws-crypto/util': registry.npmjs.org/@aws-crypto/util/2.0.1
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/1.14.1
+    dev: false
+
+  registry.npmjs.org/@aws-crypto/supports-web-crypto/2.0.0:
+    resolution: {integrity: sha512-Ge7WQ3E0OC7FHYprsZV3h0QIcpdyJLvIeg+uTuHqRYm8D6qCFJoiC+edSzSyFiHtZf+NOQDJ1q46qxjtzIY2nA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-crypto/supports-web-crypto/-/supports-web-crypto-2.0.0.tgz}
+    name: '@aws-crypto/supports-web-crypto'
+    version: 2.0.0
+    dependencies:
+      tslib: registry.npmjs.org/tslib/1.14.1
+    dev: false
+
+  registry.npmjs.org/@aws-crypto/util/2.0.1:
+    resolution: {integrity: sha512-JJmFFwvbm08lULw4Nm5QOLg8+lAQeC8aCXK5xrtxntYzYXCGfHwUJ4Is3770Q7HmICsXthGQ+ZsDL7C2uH3yBQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-crypto/util/-/util-2.0.1.tgz}
+    name: '@aws-crypto/util'
+    version: 2.0.1
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-utf8-browser': registry.npmjs.org/@aws-sdk/util-utf8-browser/3.47.0
+      tslib: registry.npmjs.org/tslib/1.14.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/abort-controller/3.47.0:
+    resolution: {integrity: sha512-6sxt11dVaJT8CzfVsGCV3h2R0LO12fvXsvCZsMsPGtivb4ZgoFK+PO3hs+9xuA3zjMUC7mb6LE2RM8EXKBDjDw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/abort-controller/-/abort-controller-3.47.0.tgz}
+    name: '@aws-sdk/abort-controller'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/chunked-blob-reader-native/3.47.0:
+    resolution: {integrity: sha512-Th5amimvBEGSBgOOhqQb2w8ii38QFHocfQaK5pC1sBkn8H57UZ965yrCHoFlvEWAUgR0j0et+WeWNx+0wkAQRQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/chunked-blob-reader-native/-/chunked-blob-reader-native-3.47.0.tgz}
+    name: '@aws-sdk/chunked-blob-reader-native'
+    version: 3.47.0
+    dependencies:
+      '@aws-sdk/util-base64-browser': registry.npmjs.org/@aws-sdk/util-base64-browser/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/chunked-blob-reader/3.47.0:
+    resolution: {integrity: sha512-R8kXhgz7Ys6Esi2jCWQd+0ZCs9aXGFPWPeMVtefDTZuUSr/rX6vnq1+qouyv44UXe+MOmYT5qTkho+sFh2dPvA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/chunked-blob-reader/-/chunked-blob-reader-3.47.0.tgz}
+    name: '@aws-sdk/chunked-blob-reader'
+    version: 3.47.0
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/client-s3/3.47.0:
+    resolution: {integrity: sha512-qKd6nx/fvA+UY3G4+HbQUw1uB+yEwaUO/QSLhFO6O0Ci2ZjErDAdrZJKMc0S3C93hLfotN/ABFUFPiTbokLziw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/client-s3/-/client-s3-3.47.0.tgz}
+    name: '@aws-sdk/client-s3'
+    version: 3.47.0
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      '@aws-crypto/sha256-browser': registry.npmjs.org/@aws-crypto/sha256-browser/2.0.0
+      '@aws-crypto/sha256-js': registry.npmjs.org/@aws-crypto/sha256-js/2.0.0
+      '@aws-sdk/client-sts': registry.npmjs.org/@aws-sdk/client-sts/3.47.0
+      '@aws-sdk/config-resolver': registry.npmjs.org/@aws-sdk/config-resolver/3.47.0
+      '@aws-sdk/credential-provider-node': registry.npmjs.org/@aws-sdk/credential-provider-node/3.47.0
+      '@aws-sdk/eventstream-serde-browser': registry.npmjs.org/@aws-sdk/eventstream-serde-browser/3.47.0
+      '@aws-sdk/eventstream-serde-config-resolver': registry.npmjs.org/@aws-sdk/eventstream-serde-config-resolver/3.47.0
+      '@aws-sdk/eventstream-serde-node': registry.npmjs.org/@aws-sdk/eventstream-serde-node/3.47.0
+      '@aws-sdk/fetch-http-handler': registry.npmjs.org/@aws-sdk/fetch-http-handler/3.47.0
+      '@aws-sdk/hash-blob-browser': registry.npmjs.org/@aws-sdk/hash-blob-browser/3.47.0
+      '@aws-sdk/hash-node': registry.npmjs.org/@aws-sdk/hash-node/3.47.0
+      '@aws-sdk/hash-stream-node': registry.npmjs.org/@aws-sdk/hash-stream-node/3.47.0
+      '@aws-sdk/invalid-dependency': registry.npmjs.org/@aws-sdk/invalid-dependency/3.47.0
+      '@aws-sdk/md5-js': registry.npmjs.org/@aws-sdk/md5-js/3.47.0
+      '@aws-sdk/middleware-apply-body-checksum': registry.npmjs.org/@aws-sdk/middleware-apply-body-checksum/3.47.0
+      '@aws-sdk/middleware-bucket-endpoint': registry.npmjs.org/@aws-sdk/middleware-bucket-endpoint/3.47.0
+      '@aws-sdk/middleware-content-length': registry.npmjs.org/@aws-sdk/middleware-content-length/3.47.0
+      '@aws-sdk/middleware-expect-continue': registry.npmjs.org/@aws-sdk/middleware-expect-continue/3.47.0
+      '@aws-sdk/middleware-host-header': registry.npmjs.org/@aws-sdk/middleware-host-header/3.47.0
+      '@aws-sdk/middleware-location-constraint': registry.npmjs.org/@aws-sdk/middleware-location-constraint/3.47.0
+      '@aws-sdk/middleware-logger': registry.npmjs.org/@aws-sdk/middleware-logger/3.47.0
+      '@aws-sdk/middleware-retry': registry.npmjs.org/@aws-sdk/middleware-retry/3.47.0
+      '@aws-sdk/middleware-sdk-s3': registry.npmjs.org/@aws-sdk/middleware-sdk-s3/3.47.0
+      '@aws-sdk/middleware-serde': registry.npmjs.org/@aws-sdk/middleware-serde/3.47.0
+      '@aws-sdk/middleware-signing': registry.npmjs.org/@aws-sdk/middleware-signing/3.47.0
+      '@aws-sdk/middleware-ssec': registry.npmjs.org/@aws-sdk/middleware-ssec/3.47.0
+      '@aws-sdk/middleware-stack': registry.npmjs.org/@aws-sdk/middleware-stack/3.47.0
+      '@aws-sdk/middleware-user-agent': registry.npmjs.org/@aws-sdk/middleware-user-agent/3.47.0
+      '@aws-sdk/node-config-provider': registry.npmjs.org/@aws-sdk/node-config-provider/3.47.0
+      '@aws-sdk/node-http-handler': registry.npmjs.org/@aws-sdk/node-http-handler/3.47.0
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/smithy-client': registry.npmjs.org/@aws-sdk/smithy-client/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/url-parser': registry.npmjs.org/@aws-sdk/url-parser/3.47.0
+      '@aws-sdk/util-base64-browser': registry.npmjs.org/@aws-sdk/util-base64-browser/3.47.0
+      '@aws-sdk/util-base64-node': registry.npmjs.org/@aws-sdk/util-base64-node/3.47.0
+      '@aws-sdk/util-body-length-browser': registry.npmjs.org/@aws-sdk/util-body-length-browser/3.47.0
+      '@aws-sdk/util-body-length-node': registry.npmjs.org/@aws-sdk/util-body-length-node/3.47.0
+      '@aws-sdk/util-defaults-mode-browser': registry.npmjs.org/@aws-sdk/util-defaults-mode-browser/3.47.0
+      '@aws-sdk/util-defaults-mode-node': registry.npmjs.org/@aws-sdk/util-defaults-mode-node/3.47.0
+      '@aws-sdk/util-user-agent-browser': registry.npmjs.org/@aws-sdk/util-user-agent-browser/3.47.0
+      '@aws-sdk/util-user-agent-node': registry.npmjs.org/@aws-sdk/util-user-agent-node/3.47.0
+      '@aws-sdk/util-utf8-browser': registry.npmjs.org/@aws-sdk/util-utf8-browser/3.47.0
+      '@aws-sdk/util-utf8-node': registry.npmjs.org/@aws-sdk/util-utf8-node/3.47.0
+      '@aws-sdk/util-waiter': registry.npmjs.org/@aws-sdk/util-waiter/3.47.0
+      '@aws-sdk/xml-builder': registry.npmjs.org/@aws-sdk/xml-builder/3.47.0
+      entities: registry.npmjs.org/entities/2.2.0
+      fast-xml-parser: registry.npmjs.org/fast-xml-parser/3.19.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    transitivePeerDependencies:
+      - '@aws-sdk/signature-v4-crt'
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/client-sso/3.47.0:
+    resolution: {integrity: sha512-akkyVuElsSiCCUSGIIZjIhSaPg6hjebffjtcfn1yNHTrZchKw02htUpl4BJUpZE2patFABIDhaW4UK3xPtklAQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/client-sso/-/client-sso-3.47.0.tgz}
+    name: '@aws-sdk/client-sso'
+    version: 3.47.0
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      '@aws-crypto/sha256-browser': registry.npmjs.org/@aws-crypto/sha256-browser/2.0.0
+      '@aws-crypto/sha256-js': registry.npmjs.org/@aws-crypto/sha256-js/2.0.0
+      '@aws-sdk/config-resolver': registry.npmjs.org/@aws-sdk/config-resolver/3.47.0
+      '@aws-sdk/fetch-http-handler': registry.npmjs.org/@aws-sdk/fetch-http-handler/3.47.0
+      '@aws-sdk/hash-node': registry.npmjs.org/@aws-sdk/hash-node/3.47.0
+      '@aws-sdk/invalid-dependency': registry.npmjs.org/@aws-sdk/invalid-dependency/3.47.0
+      '@aws-sdk/middleware-content-length': registry.npmjs.org/@aws-sdk/middleware-content-length/3.47.0
+      '@aws-sdk/middleware-host-header': registry.npmjs.org/@aws-sdk/middleware-host-header/3.47.0
+      '@aws-sdk/middleware-logger': registry.npmjs.org/@aws-sdk/middleware-logger/3.47.0
+      '@aws-sdk/middleware-retry': registry.npmjs.org/@aws-sdk/middleware-retry/3.47.0
+      '@aws-sdk/middleware-serde': registry.npmjs.org/@aws-sdk/middleware-serde/3.47.0
+      '@aws-sdk/middleware-stack': registry.npmjs.org/@aws-sdk/middleware-stack/3.47.0
+      '@aws-sdk/middleware-user-agent': registry.npmjs.org/@aws-sdk/middleware-user-agent/3.47.0
+      '@aws-sdk/node-config-provider': registry.npmjs.org/@aws-sdk/node-config-provider/3.47.0
+      '@aws-sdk/node-http-handler': registry.npmjs.org/@aws-sdk/node-http-handler/3.47.0
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/smithy-client': registry.npmjs.org/@aws-sdk/smithy-client/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/url-parser': registry.npmjs.org/@aws-sdk/url-parser/3.47.0
+      '@aws-sdk/util-base64-browser': registry.npmjs.org/@aws-sdk/util-base64-browser/3.47.0
+      '@aws-sdk/util-base64-node': registry.npmjs.org/@aws-sdk/util-base64-node/3.47.0
+      '@aws-sdk/util-body-length-browser': registry.npmjs.org/@aws-sdk/util-body-length-browser/3.47.0
+      '@aws-sdk/util-body-length-node': registry.npmjs.org/@aws-sdk/util-body-length-node/3.47.0
+      '@aws-sdk/util-defaults-mode-browser': registry.npmjs.org/@aws-sdk/util-defaults-mode-browser/3.47.0
+      '@aws-sdk/util-defaults-mode-node': registry.npmjs.org/@aws-sdk/util-defaults-mode-node/3.47.0
+      '@aws-sdk/util-user-agent-browser': registry.npmjs.org/@aws-sdk/util-user-agent-browser/3.47.0
+      '@aws-sdk/util-user-agent-node': registry.npmjs.org/@aws-sdk/util-user-agent-node/3.47.0
+      '@aws-sdk/util-utf8-browser': registry.npmjs.org/@aws-sdk/util-utf8-browser/3.47.0
+      '@aws-sdk/util-utf8-node': registry.npmjs.org/@aws-sdk/util-utf8-node/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/client-sts/3.47.0:
+    resolution: {integrity: sha512-GVBeDm8XS2nSz2XS8cDJuudb3E4OWk9CCMzftjJBdFNacRx76irSBnerCGgHG1wwoaUD90lUCDbdY/IwVlS4Pg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/client-sts/-/client-sts-3.47.0.tgz}
+    name: '@aws-sdk/client-sts'
+    version: 3.47.0
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      '@aws-crypto/sha256-browser': registry.npmjs.org/@aws-crypto/sha256-browser/2.0.0
+      '@aws-crypto/sha256-js': registry.npmjs.org/@aws-crypto/sha256-js/2.0.0
+      '@aws-sdk/config-resolver': registry.npmjs.org/@aws-sdk/config-resolver/3.47.0
+      '@aws-sdk/credential-provider-node': registry.npmjs.org/@aws-sdk/credential-provider-node/3.47.0
+      '@aws-sdk/fetch-http-handler': registry.npmjs.org/@aws-sdk/fetch-http-handler/3.47.0
+      '@aws-sdk/hash-node': registry.npmjs.org/@aws-sdk/hash-node/3.47.0
+      '@aws-sdk/invalid-dependency': registry.npmjs.org/@aws-sdk/invalid-dependency/3.47.0
+      '@aws-sdk/middleware-content-length': registry.npmjs.org/@aws-sdk/middleware-content-length/3.47.0
+      '@aws-sdk/middleware-host-header': registry.npmjs.org/@aws-sdk/middleware-host-header/3.47.0
+      '@aws-sdk/middleware-logger': registry.npmjs.org/@aws-sdk/middleware-logger/3.47.0
+      '@aws-sdk/middleware-retry': registry.npmjs.org/@aws-sdk/middleware-retry/3.47.0
+      '@aws-sdk/middleware-sdk-sts': registry.npmjs.org/@aws-sdk/middleware-sdk-sts/3.47.0
+      '@aws-sdk/middleware-serde': registry.npmjs.org/@aws-sdk/middleware-serde/3.47.0
+      '@aws-sdk/middleware-signing': registry.npmjs.org/@aws-sdk/middleware-signing/3.47.0
+      '@aws-sdk/middleware-stack': registry.npmjs.org/@aws-sdk/middleware-stack/3.47.0
+      '@aws-sdk/middleware-user-agent': registry.npmjs.org/@aws-sdk/middleware-user-agent/3.47.0
+      '@aws-sdk/node-config-provider': registry.npmjs.org/@aws-sdk/node-config-provider/3.47.0
+      '@aws-sdk/node-http-handler': registry.npmjs.org/@aws-sdk/node-http-handler/3.47.0
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/smithy-client': registry.npmjs.org/@aws-sdk/smithy-client/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/url-parser': registry.npmjs.org/@aws-sdk/url-parser/3.47.0
+      '@aws-sdk/util-base64-browser': registry.npmjs.org/@aws-sdk/util-base64-browser/3.47.0
+      '@aws-sdk/util-base64-node': registry.npmjs.org/@aws-sdk/util-base64-node/3.47.0
+      '@aws-sdk/util-body-length-browser': registry.npmjs.org/@aws-sdk/util-body-length-browser/3.47.0
+      '@aws-sdk/util-body-length-node': registry.npmjs.org/@aws-sdk/util-body-length-node/3.47.0
+      '@aws-sdk/util-defaults-mode-browser': registry.npmjs.org/@aws-sdk/util-defaults-mode-browser/3.47.0
+      '@aws-sdk/util-defaults-mode-node': registry.npmjs.org/@aws-sdk/util-defaults-mode-node/3.47.0
+      '@aws-sdk/util-user-agent-browser': registry.npmjs.org/@aws-sdk/util-user-agent-browser/3.47.0
+      '@aws-sdk/util-user-agent-node': registry.npmjs.org/@aws-sdk/util-user-agent-node/3.47.0
+      '@aws-sdk/util-utf8-browser': registry.npmjs.org/@aws-sdk/util-utf8-browser/3.47.0
+      '@aws-sdk/util-utf8-node': registry.npmjs.org/@aws-sdk/util-utf8-node/3.47.0
+      entities: registry.npmjs.org/entities/2.2.0
+      fast-xml-parser: registry.npmjs.org/fast-xml-parser/3.19.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/config-resolver/3.47.0:
+    resolution: {integrity: sha512-D3YV/hIVaUOHDVpLCwZGOyjSdQpxOVKnRPWT++kR6W0r5WC9F4tEtVCYwMnFRTVhOH87VvcMG/dkT5J4gTAgtQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/config-resolver/-/config-resolver-3.47.0.tgz}
+    name: '@aws-sdk/config-resolver'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/signature-v4': registry.npmjs.org/@aws-sdk/signature-v4/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-config-provider': registry.npmjs.org/@aws-sdk/util-config-provider/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/credential-provider-env/3.47.0:
+    resolution: {integrity: sha512-x5FctbVUkr//KbjDm8UFFZ7caEl0O1E3vDOxezzZ4yUX4EraKRuYKO1dZIAGNBbNzSBv5simpqVxIXNuGyK9zw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/credential-provider-env/-/credential-provider-env-3.47.0.tgz}
+    name: '@aws-sdk/credential-provider-env'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/credential-provider-imds/3.47.0:
+    resolution: {integrity: sha512-GKfl8O/5Ywnn6/0KfsXopXKrGF31MWCBivISAbubN08X5Up7sQoJPAaDZ5xsi389yZ7+fdTCLKwOyrxobIsGLA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/credential-provider-imds/-/credential-provider-imds-3.47.0.tgz}
+    name: '@aws-sdk/credential-provider-imds'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/node-config-provider': registry.npmjs.org/@aws-sdk/node-config-provider/3.47.0
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/url-parser': registry.npmjs.org/@aws-sdk/url-parser/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/credential-provider-ini/3.47.0:
+    resolution: {integrity: sha512-h0VWqSdpDYjOMVJRmBXcVFW1+znXMGPmp2fXIg/1dgNkgbdstknFEwUXbgzmrVmE33Wc2UNpQYmnn3lvLUo85Q==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/credential-provider-ini/-/credential-provider-ini-3.47.0.tgz}
+    name: '@aws-sdk/credential-provider-ini'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/credential-provider-env': registry.npmjs.org/@aws-sdk/credential-provider-env/3.47.0
+      '@aws-sdk/credential-provider-imds': registry.npmjs.org/@aws-sdk/credential-provider-imds/3.47.0
+      '@aws-sdk/credential-provider-sso': registry.npmjs.org/@aws-sdk/credential-provider-sso/3.47.0
+      '@aws-sdk/credential-provider-web-identity': registry.npmjs.org/@aws-sdk/credential-provider-web-identity/3.47.0
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/shared-ini-file-loader': registry.npmjs.org/@aws-sdk/shared-ini-file-loader/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-credentials': registry.npmjs.org/@aws-sdk/util-credentials/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/credential-provider-node/3.47.0:
+    resolution: {integrity: sha512-38T8CK7aUI7Uca3Wu686c6OAaLCfvmIPteiTyRQDr+GA9ElJo5d6bONc2ICibLzV7OGqgP/a7wPONnGPEe3VzA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/credential-provider-node/-/credential-provider-node-3.47.0.tgz}
+    name: '@aws-sdk/credential-provider-node'
+    version: 3.47.0
+    engines: {node: '>=12.0.0'}
+    dependencies:
+      '@aws-sdk/credential-provider-env': registry.npmjs.org/@aws-sdk/credential-provider-env/3.47.0
+      '@aws-sdk/credential-provider-imds': registry.npmjs.org/@aws-sdk/credential-provider-imds/3.47.0
+      '@aws-sdk/credential-provider-ini': registry.npmjs.org/@aws-sdk/credential-provider-ini/3.47.0
+      '@aws-sdk/credential-provider-process': registry.npmjs.org/@aws-sdk/credential-provider-process/3.47.0
+      '@aws-sdk/credential-provider-sso': registry.npmjs.org/@aws-sdk/credential-provider-sso/3.47.0
+      '@aws-sdk/credential-provider-web-identity': registry.npmjs.org/@aws-sdk/credential-provider-web-identity/3.47.0
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/shared-ini-file-loader': registry.npmjs.org/@aws-sdk/shared-ini-file-loader/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-credentials': registry.npmjs.org/@aws-sdk/util-credentials/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/credential-provider-process/3.47.0:
+    resolution: {integrity: sha512-uk/u9tCzsgrYx9V6GtGlp6xkbblyF0auofxKIEyr2xIFQAtfa9GhCAP1F9bMbH9LcdF3pYhGI5rT3FCBuBbdmg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/credential-provider-process/-/credential-provider-process-3.47.0.tgz}
+    name: '@aws-sdk/credential-provider-process'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/shared-ini-file-loader': registry.npmjs.org/@aws-sdk/shared-ini-file-loader/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-credentials': registry.npmjs.org/@aws-sdk/util-credentials/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/credential-provider-sso/3.47.0:
+    resolution: {integrity: sha512-isM2AKsgz/8mWP4mAAZZ0h4dMx2cNXu7mwNVl0XICV0JQlMA2CYcC9UfQ34NtCsZUY+gjhU2A001Ai9yJDispg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/credential-provider-sso/-/credential-provider-sso-3.47.0.tgz}
+    name: '@aws-sdk/credential-provider-sso'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/client-sso': registry.npmjs.org/@aws-sdk/client-sso/3.47.0
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/shared-ini-file-loader': registry.npmjs.org/@aws-sdk/shared-ini-file-loader/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-credentials': registry.npmjs.org/@aws-sdk/util-credentials/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/credential-provider-web-identity/3.47.0:
+    resolution: {integrity: sha512-Tz17aDOuQv/lIRHuc/cbCS902QCpGakcy4MBxDPj1g5ccozrJC7IniS7OB3X4ghberggxx/4raWjNToNqtfobg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/credential-provider-web-identity/-/credential-provider-web-identity-3.47.0.tgz}
+    name: '@aws-sdk/credential-provider-web-identity'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/eventstream-marshaller/3.47.0:
+    resolution: {integrity: sha512-No8Kv7WOMpVUpagAYtfwmnQ/vGGXNix2X7FgBzIlsg490WIdUDhRLPi2Mm8jFKojKrdFA0L5QUktkHSBsz44eA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/eventstream-marshaller/-/eventstream-marshaller-3.47.0.tgz}
+    name: '@aws-sdk/eventstream-marshaller'
+    version: 3.47.0
+    dependencies:
+      '@aws-crypto/crc32': registry.npmjs.org/@aws-crypto/crc32/2.0.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-hex-encoding': registry.npmjs.org/@aws-sdk/util-hex-encoding/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/eventstream-serde-browser/3.47.0:
+    resolution: {integrity: sha512-F6kksTyIijSU7lxr0Hec80K67aoHZoo6VrCNRzCRme6aVWkkg5Zn7+dYOuwUOUM33gWPnbYk4EJsnfiMnuzt2w==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/eventstream-serde-browser/-/eventstream-serde-browser-3.47.0.tgz}
+    name: '@aws-sdk/eventstream-serde-browser'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/eventstream-marshaller': registry.npmjs.org/@aws-sdk/eventstream-marshaller/3.47.0
+      '@aws-sdk/eventstream-serde-universal': registry.npmjs.org/@aws-sdk/eventstream-serde-universal/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/eventstream-serde-config-resolver/3.47.0:
+    resolution: {integrity: sha512-UrWoaWGEidrlzIFk39RnzNmF5ssFYflIOjmJS8AO9y6OUNf2jWZ6W0HtrjBYmgBFmeFZxDH16FZHAhLsA6ouVA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/eventstream-serde-config-resolver/-/eventstream-serde-config-resolver-3.47.0.tgz}
+    name: '@aws-sdk/eventstream-serde-config-resolver'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/eventstream-serde-node/3.47.0:
+    resolution: {integrity: sha512-o9aL2nkpTjkHDA1A6wl50hsZHV+95aga0KyB7v1G0TPpLRHUvCELNiiK3G/1eO3LSgqoshu1w2vXi4JjjAeqlQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/eventstream-serde-node/-/eventstream-serde-node-3.47.0.tgz}
+    name: '@aws-sdk/eventstream-serde-node'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/eventstream-marshaller': registry.npmjs.org/@aws-sdk/eventstream-marshaller/3.47.0
+      '@aws-sdk/eventstream-serde-universal': registry.npmjs.org/@aws-sdk/eventstream-serde-universal/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/eventstream-serde-universal/3.47.0:
+    resolution: {integrity: sha512-vi7e1XB66OK7If/ZvMuxNjl0bb/SFJSs2iW8q88btaVZHqfmUbcVDd0I/vJ7N32F0cwVVSxM+pEXRLg3hwYdIw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/eventstream-serde-universal/-/eventstream-serde-universal-3.47.0.tgz}
+    name: '@aws-sdk/eventstream-serde-universal'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/eventstream-marshaller': registry.npmjs.org/@aws-sdk/eventstream-marshaller/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/fetch-http-handler/3.47.0:
+    resolution: {integrity: sha512-FSQ5qQkHmCNAgjO2E89vV4QAN66EnHK8sTh4eH55UU0+9/h85g0uMTLMovoEN5Jk+h6AmPCbeq9i+HcPJTmWEQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/fetch-http-handler/-/fetch-http-handler-3.47.0.tgz}
+    name: '@aws-sdk/fetch-http-handler'
+    version: 3.47.0
+    dependencies:
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/querystring-builder': registry.npmjs.org/@aws-sdk/querystring-builder/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-base64-browser': registry.npmjs.org/@aws-sdk/util-base64-browser/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/hash-blob-browser/3.47.0:
+    resolution: {integrity: sha512-6rL4cy3XWSm89/lKZ1ip15mkTe5GXmTnQJTzwcDrtxbpZXeIsEDkeNPqNW9jGerWnMYW04SDxGek7dIDjIpVhg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/hash-blob-browser/-/hash-blob-browser-3.47.0.tgz}
+    name: '@aws-sdk/hash-blob-browser'
+    version: 3.47.0
+    dependencies:
+      '@aws-sdk/chunked-blob-reader': registry.npmjs.org/@aws-sdk/chunked-blob-reader/3.47.0
+      '@aws-sdk/chunked-blob-reader-native': registry.npmjs.org/@aws-sdk/chunked-blob-reader-native/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/hash-node/3.47.0:
+    resolution: {integrity: sha512-OqLS/WweCBJz4BwO+EPF1yDeDo8YXXavY/vXElX6reb9+xew9TqmHoFSlFSR8GXkPU7SO+YnlOtmikpMz6fExQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/hash-node/-/hash-node-3.47.0.tgz}
+    name: '@aws-sdk/hash-node'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-buffer-from': registry.npmjs.org/@aws-sdk/util-buffer-from/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/hash-stream-node/3.47.0:
+    resolution: {integrity: sha512-VGCp0WEhMVvP+UBQDkzWgaqWvObS95cPu8mA96+H55dofuGWy9C1qib6wBvs5O+S/fc89ntCyBODeA0j/TAneg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/hash-stream-node/-/hash-stream-node-3.47.0.tgz}
+    name: '@aws-sdk/hash-stream-node'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/invalid-dependency/3.47.0:
+    resolution: {integrity: sha512-D2n0RA0o8WyFqPuwbVks177KasNK0bcJn+Fp6GzopSwSXQctULidm7S9pDS9fQW9TZW8xREeHhEyRgmstKc+PQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/invalid-dependency/-/invalid-dependency-3.47.0.tgz}
+    name: '@aws-sdk/invalid-dependency'
+    version: 3.47.0
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/is-array-buffer/3.47.0:
+    resolution: {integrity: sha512-vm3rjUo9EYjLiog3OxGu+f0CdFjTooO2mg5bGb13Xv/2jpg6Z573Skms8nPEaF+ULJWJvobdK+yGw8r4w22cLA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/is-array-buffer/-/is-array-buffer-3.47.0.tgz}
+    name: '@aws-sdk/is-array-buffer'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/md5-js/3.47.0:
+    resolution: {integrity: sha512-Pwe0fv1K5ivQjc9ONcXoz0cEPpMcs+9JGb6LjtE+nPGlUYaEEFTeaWqUk3tQhvvznegWqBPzd+29w8GWQ5Fqmg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/md5-js/-/md5-js-3.47.0.tgz}
+    name: '@aws-sdk/md5-js'
+    version: 3.47.0
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-utf8-browser': registry.npmjs.org/@aws-sdk/util-utf8-browser/3.47.0
+      '@aws-sdk/util-utf8-node': registry.npmjs.org/@aws-sdk/util-utf8-node/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-apply-body-checksum/3.47.0:
+    resolution: {integrity: sha512-6Ge7Jf+obPuHDtaPqGtpgFE9fAGirkGsL4uXAojzLr5sQPnY905uiq6/99ewH+WLm02z8sNC/Z2vnxkiAix3Ow==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-apply-body-checksum/-/middleware-apply-body-checksum-3.47.0.tgz}
+    name: '@aws-sdk/middleware-apply-body-checksum'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/is-array-buffer': registry.npmjs.org/@aws-sdk/is-array-buffer/3.47.0
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-bucket-endpoint/3.47.0:
+    resolution: {integrity: sha512-u4i9Jk/j7QNseDZ2pzr3+XSjLerjcIqa8CGI+YcMEeMVQohQLbeNSiWftjkpaV+X2igI/4RKlgCjtiixTTsXMg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-bucket-endpoint/-/middleware-bucket-endpoint-3.47.0.tgz}
+    name: '@aws-sdk/middleware-bucket-endpoint'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-arn-parser': registry.npmjs.org/@aws-sdk/util-arn-parser/3.47.0
+      '@aws-sdk/util-config-provider': registry.npmjs.org/@aws-sdk/util-config-provider/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-content-length/3.47.0:
+    resolution: {integrity: sha512-xLz7BOYpb4rDsxOzyo5v7zPPI1F6vP+S19zpGcBWCg9csIOrbwSTrtwU+yOAfq7ZG+GSVxWnvMEsyqm362VF8Q==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-content-length/-/middleware-content-length-3.47.0.tgz}
+    name: '@aws-sdk/middleware-content-length'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-expect-continue/3.47.0:
+    resolution: {integrity: sha512-Pi/HaBzatz04o3QtmgWMTnDHYM73XAo6JzHAzlA9LZP0AkB2W34lD0i9mfq+kOqgepfEOnAf2QcE7EX1XfhWPA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-expect-continue/-/middleware-expect-continue-3.47.0.tgz}
+    name: '@aws-sdk/middleware-expect-continue'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/middleware-header-default': registry.npmjs.org/@aws-sdk/middleware-header-default/3.47.0
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-header-default/3.47.0:
+    resolution: {integrity: sha512-zHtGb5GUCaOJV6fmwSdnKHXcMPcjtBw1FThrht9MQs9wcQE2iV3T6oUSIa1NhT2jGyjm86JKor5XPV5hG/ecsw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-header-default/-/middleware-header-default-3.47.0.tgz}
+    name: '@aws-sdk/middleware-header-default'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-host-header/3.47.0:
+    resolution: {integrity: sha512-jkCoH7wHTWo5UduB46e4A71Uj5EKSYf/44Sxf+/PGyOaGW+SbP9nkjdjyWKB5p84WmvhayZLed/qUJgJpTrpGA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-host-header/-/middleware-host-header-3.47.0.tgz}
+    name: '@aws-sdk/middleware-host-header'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-location-constraint/3.47.0:
+    resolution: {integrity: sha512-ebO7W0G6m/Zo5Zkiud6HPU6NDSkgk4MiW8fOX+/4b0Vol55XrryMWSzS+t6+L8jIC3tqIXmaHTZbhUP3LXhIWA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-location-constraint/-/middleware-location-constraint-3.47.0.tgz}
+    name: '@aws-sdk/middleware-location-constraint'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-logger/3.47.0:
+    resolution: {integrity: sha512-cK1q+43n2jh/j7jTuFIez7u5k56i2YnjP3DRlh12PfiXiA9V39mfdIu59XHERtE+wJlAyHUq1lYix83CMXOWfQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-logger/-/middleware-logger-3.47.0.tgz}
+    name: '@aws-sdk/middleware-logger'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-retry/3.47.0:
+    resolution: {integrity: sha512-AHIxtUFNWSLNZjpgR0Jfx+6X78qPJjmyrfv8S5MVW1uURZK14aepV+0JyGBkjFPJVu0yQzcIlvIgKO20e3zQwQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-retry/-/middleware-retry-3.47.0.tgz}
+    name: '@aws-sdk/middleware-retry'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/service-error-classification': registry.npmjs.org/@aws-sdk/service-error-classification/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+      uuid: registry.npmjs.org/uuid/8.3.2
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-sdk-s3/3.47.0:
+    resolution: {integrity: sha512-ysnDyfNvZKfnUI5eG25/GLGpe98tw6odAzNIylT4lLBt9ElyvYc/QCKgVb5uFSqRvshsk0gQPmdX0odsV+43ng==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-sdk-s3/-/middleware-sdk-s3-3.47.0.tgz}
+    name: '@aws-sdk/middleware-sdk-s3'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    peerDependencies:
+      '@aws-sdk/signature-v4-crt': ^3.31.0
+    dependencies:
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/signature-v4': registry.npmjs.org/@aws-sdk/signature-v4/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-arn-parser': registry.npmjs.org/@aws-sdk/util-arn-parser/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-sdk-sts/3.47.0:
+    resolution: {integrity: sha512-DbXxMeGmnxjOt6fk2UHuQQmuRILnHr5mj6e3xwiYmkg7ClM2fmP3vy94Q98RgDtpEwlyb6yHCONiWP4iXExoug==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-sdk-sts/-/middleware-sdk-sts-3.47.0.tgz}
+    name: '@aws-sdk/middleware-sdk-sts'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/middleware-signing': registry.npmjs.org/@aws-sdk/middleware-signing/3.47.0
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/signature-v4': registry.npmjs.org/@aws-sdk/signature-v4/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-serde/3.47.0:
+    resolution: {integrity: sha512-MYJqW9xoq//FHa6A6drZ48Wswy8vuFrnbTsKK45AsIKs8kdscYnlWC8s7ndmYrMoT4235TRi8QgcjLC8WMIu9Q==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-serde/-/middleware-serde-3.47.0.tgz}
+    name: '@aws-sdk/middleware-serde'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-signing/3.47.0:
+    resolution: {integrity: sha512-oDQ93PiP/90Kl7b3AcHLxsHtWNSxTSdYbJRu4mLb31jKobd2GmLc+tz7L8DpKRyv+fkbrf0Lxh/zLAwaaZdNfg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-signing/-/middleware-signing-3.47.0.tgz}
+    name: '@aws-sdk/middleware-signing'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/signature-v4': registry.npmjs.org/@aws-sdk/signature-v4/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-ssec/3.47.0:
+    resolution: {integrity: sha512-Me/VHaFtG3OIgUPIVm59DZJfzWvBnj/WeUeJ1kyxecK/vC1GZriZrhGBHjrrJh1I7HWgRhE58NYdmjj9l0Bayg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-ssec/-/middleware-ssec-3.47.0.tgz}
+    name: '@aws-sdk/middleware-ssec'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-stack/3.47.0:
+    resolution: {integrity: sha512-F2iwZMXERLTddIovCa7uQmrKXTu3O/Rbym/xKC51J1hnELoNudzIuNIdUQsnSfSIJBl0pB5najN1O2IHBcO/oQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-stack/-/middleware-stack-3.47.0.tgz}
+    name: '@aws-sdk/middleware-stack'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/middleware-user-agent/3.47.0:
+    resolution: {integrity: sha512-L0uYhbzXDXSYkvtSzLhpSqv/Hg0Wlwf0PPdYHqPmNJFrN+rigjxvu32e10lZj8JCsqX/tRlPULQdrn1mOvHeMg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/middleware-user-agent/-/middleware-user-agent-3.47.0.tgz}
+    name: '@aws-sdk/middleware-user-agent'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/node-config-provider/3.47.0:
+    resolution: {integrity: sha512-YLv2CmM8CfedhtrqMhSoEtJenJlWWGCBOvhewXhEPMa+P/PKZ9HxsKdOTC/+lpuWhnD700fG6kFnn2R0kSQE4g==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/node-config-provider/-/node-config-provider-3.47.0.tgz}
+    name: '@aws-sdk/node-config-provider'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/shared-ini-file-loader': registry.npmjs.org/@aws-sdk/shared-ini-file-loader/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/node-http-handler/3.47.0:
+    resolution: {integrity: sha512-wZAU3BLLn/mmWR8bYIBdx+gcdwjO1KNNe7C6yXUwvFgClBjCxqR6C32k8CJ3eGiKulGgkBmX8DKGXIdqv0W7kw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/node-http-handler/-/node-http-handler-3.47.0.tgz}
+    name: '@aws-sdk/node-http-handler'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/abort-controller': registry.npmjs.org/@aws-sdk/abort-controller/3.47.0
+      '@aws-sdk/protocol-http': registry.npmjs.org/@aws-sdk/protocol-http/3.47.0
+      '@aws-sdk/querystring-builder': registry.npmjs.org/@aws-sdk/querystring-builder/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/property-provider/3.47.0:
+    resolution: {integrity: sha512-S59dASvUxqepS9jTxoN9YrP1CTioYcbNLdg2VwFNglXNRekOP2sxyvtGxDE3oVc3ZgzEyq8+OWsReONf8Tdy4g==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/property-provider/-/property-provider-3.47.0.tgz}
+    name: '@aws-sdk/property-provider'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/protocol-http/3.47.0:
+    resolution: {integrity: sha512-Oz9iTfuMmpGVB8AGqJ4A1S8OmcAQlM4/f0QLHLp1Kcjnu7H3jysk3B7qWLgqxO7DwKEX4XU8AXohwQv1aXgI8Q==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/protocol-http/-/protocol-http-3.47.0.tgz}
+    name: '@aws-sdk/protocol-http'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/querystring-builder/3.47.0:
+    resolution: {integrity: sha512-Ou5ipsOZgsMkSnA61Y5xRoOaxHX9vuqBlWL6iAppSonFanj73qrmymUY+AGUznDiUAxCWcvxdnPUIYDm5grwyg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/querystring-builder/-/querystring-builder-3.47.0.tgz}
+    name: '@aws-sdk/querystring-builder'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-uri-escape': registry.npmjs.org/@aws-sdk/util-uri-escape/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/querystring-parser/3.47.0:
+    resolution: {integrity: sha512-UQlLg7KDHQAQwS4lILE9wht+m3azXrNjWDAHeQqsG8mqCjvSCu5L9t3BBI+EO4dPb9CKa61fjtuzslxvpZdZ3w==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/querystring-parser/-/querystring-parser-3.47.0.tgz}
+    name: '@aws-sdk/querystring-parser'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/service-error-classification/3.47.0:
+    resolution: {integrity: sha512-15SEeOb+In/hEiSfEWYQvjuA5NeoWlh1iOt8aX4eQLqqIIr5DWyLsremTeWtNN3rIbJzU7yVHg5cv2xn3MJ8Wg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/service-error-classification/-/service-error-classification-3.47.0.tgz}
+    name: '@aws-sdk/service-error-classification'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/shared-ini-file-loader/3.47.0:
+    resolution: {integrity: sha512-yPl190HEyTNawkaOnGkG4zgY+dlXDvSx/RRMxsYoBycaU7V4dfYlXkVZDFe0hqnxw/s/aN7qKfzvEvRkrd9kcg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/shared-ini-file-loader/-/shared-ini-file-loader-3.47.0.tgz}
+    name: '@aws-sdk/shared-ini-file-loader'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/signature-v4/3.47.0:
+    resolution: {integrity: sha512-b1JDXaBRNQ9niMz7Hj6XZ2OfDNT8+a+3fP+BxmFlaFPV++Huo1ClpimzFS8KjRBBrFltTOPPJnEfS+M4cBsnEQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/signature-v4/-/signature-v4-3.47.0.tgz}
+    name: '@aws-sdk/signature-v4'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/is-array-buffer': registry.npmjs.org/@aws-sdk/is-array-buffer/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      '@aws-sdk/util-hex-encoding': registry.npmjs.org/@aws-sdk/util-hex-encoding/3.47.0
+      '@aws-sdk/util-uri-escape': registry.npmjs.org/@aws-sdk/util-uri-escape/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/smithy-client/3.47.0:
+    resolution: {integrity: sha512-rq1H//VJKopXgRJgso+BdFBD4hrssbFky1BuvXu7orIi8Wp7oS2LogKctqclX7THrXCNT6mzHaxvU6xEOWYUXg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/smithy-client/-/smithy-client-3.47.0.tgz}
+    name: '@aws-sdk/smithy-client'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/middleware-stack': registry.npmjs.org/@aws-sdk/middleware-stack/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/types/3.47.0:
+    resolution: {integrity: sha512-ljxyrASkxCsgPXW/jRGGokNtjOql4RbzEl23HEliDmmETlKOrUKVDa2iqhnz5nvqVTc1MgOQv/dr9YBO1LHHIQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/types/-/types-3.47.0.tgz}
+    name: '@aws-sdk/types'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/url-parser/3.47.0:
+    resolution: {integrity: sha512-BGfyYZgPvcJ+fW5+i29fy9IwG/2R3LYnWyZ85AFbE++8YcMueJhD7Sychh3mUINViCzjUTVC971m56ee9O9QLA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/url-parser/-/url-parser-3.47.0.tgz}
+    name: '@aws-sdk/url-parser'
+    version: 3.47.0
+    dependencies:
+      '@aws-sdk/querystring-parser': registry.npmjs.org/@aws-sdk/querystring-parser/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-arn-parser/3.47.0:
+    resolution: {integrity: sha512-ilmTCowm/QyMYGn91Cf4E+hnco6th8CVbiLUIqgUHuZRtP0iXA9oInf7/FIqdLgt7+vzyg7wHpRFosTXQ+kfqQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-arn-parser/-/util-arn-parser-3.47.0.tgz}
+    name: '@aws-sdk/util-arn-parser'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-base64-browser/3.47.0:
+    resolution: {integrity: sha512-mG6mCdWWzxdDNKmF4YAn4LH7DBdPfTH/eN8ZrkEWamx9goaO1odQz7p86bxMFe5qMHSPRMgGpCuQoJurg7E4cg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-base64-browser/-/util-base64-browser-3.47.0.tgz}
+    name: '@aws-sdk/util-base64-browser'
+    version: 3.47.0
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-base64-node/3.47.0:
+    resolution: {integrity: sha512-r2ym8kSeLR4m18TFM8M3IThkj3i0DvETF/kxPdfa2fHKL7Lq7bfUDJjzr0LmFhdy7iEEcjeLO1hyBklyCke1nQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-base64-node/-/util-base64-node-3.47.0.tgz}
+    name: '@aws-sdk/util-base64-node'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/util-buffer-from': registry.npmjs.org/@aws-sdk/util-buffer-from/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-body-length-browser/3.47.0:
+    resolution: {integrity: sha512-1hHX3uXrl/XKYx2dEULDhtBeofQLHQhllUSbtxj/t8HBZtNhwTSXgb0jbZhPvUFCnzL5ag4znYzEyukLLxgwwQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-body-length-browser/-/util-body-length-browser-3.47.0.tgz}
+    name: '@aws-sdk/util-body-length-browser'
+    version: 3.47.0
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-body-length-node/3.47.0:
+    resolution: {integrity: sha512-PGh5179ZEDS9kcUy1M0i5QiNMeVsCseXh152OT6rU/3yb0h9rozefED/DYEnW/UC0eQNDyj0mgEpT9R86e4S2w==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-body-length-node/-/util-body-length-node-3.47.0.tgz}
+    name: '@aws-sdk/util-body-length-node'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-buffer-from/3.47.0:
+    resolution: {integrity: sha512-pANJWhIZ32RuQVwtqf2rqllZngZYW0dgOiDwCMCDjBOuhlrqCVs2cwOvDJp7SS5TUg6dt6powFC7UKRRjFMe1g==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-buffer-from/-/util-buffer-from-3.47.0.tgz}
+    name: '@aws-sdk/util-buffer-from'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/is-array-buffer': registry.npmjs.org/@aws-sdk/is-array-buffer/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-config-provider/3.47.0:
+    resolution: {integrity: sha512-93JmYEtExWBlFM18yt7CuUCBf7WQGAjDEMuhy2sCmhgu+lRwicSCLkjEUFPUTxOv2QbU3HJV2CSKzpAjFAWrSA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-config-provider/-/util-config-provider-3.47.0.tgz}
+    name: '@aws-sdk/util-config-provider'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-credentials/3.47.0:
+    resolution: {integrity: sha512-0I4Azt1C+xWORep3Qq/B6ZYoIL+fPCgqxYL7k3amW5yjkS4T/r0Md6mG41pb9CEHkbIYtQhzfhcUjqb1hNgIvg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-credentials/-/util-credentials-3.47.0.tgz}
+    name: '@aws-sdk/util-credentials'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/shared-ini-file-loader': registry.npmjs.org/@aws-sdk/shared-ini-file-loader/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-defaults-mode-browser/3.47.0:
+    resolution: {integrity: sha512-W5ZYzxU23h6F/2vf6H0BJOzV0UVaCzi9l4sN/00m0FfoGMylwSVeJ0dKMwhMAq5o8sdCSRfzHdvAsXj5TjtghQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-defaults-mode-browser/-/util-defaults-mode-browser-3.47.0.tgz}
+    name: '@aws-sdk/util-defaults-mode-browser'
+    version: 3.47.0
+    engines: {node: '>= 10.0.0'}
+    dependencies:
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      bowser: registry.npmjs.org/bowser/2.11.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-defaults-mode-node/3.47.0:
+    resolution: {integrity: sha512-WSTXyAp51FaP0IGf2ZKS1iF7IZ+ct0q8qSBDp12frTIdJO2RZDTQftTq+RrOSj20LXnZi5rf0ICUOFJjomWg4w==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-defaults-mode-node/-/util-defaults-mode-node-3.47.0.tgz}
+    name: '@aws-sdk/util-defaults-mode-node'
+    version: 3.47.0
+    engines: {node: '>= 10.0.0'}
+    dependencies:
+      '@aws-sdk/config-resolver': registry.npmjs.org/@aws-sdk/config-resolver/3.47.0
+      '@aws-sdk/credential-provider-imds': registry.npmjs.org/@aws-sdk/credential-provider-imds/3.47.0
+      '@aws-sdk/node-config-provider': registry.npmjs.org/@aws-sdk/node-config-provider/3.47.0
+      '@aws-sdk/property-provider': registry.npmjs.org/@aws-sdk/property-provider/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-hex-encoding/3.47.0:
+    resolution: {integrity: sha512-94pkobzbyfasUTUOQSWOixo71ohEPGw2FHnTw/vQ28wQYVYJE8NaV2Z4MyeQlsxSvsthsE4D5u5i1uo+WKFzSQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-hex-encoding/-/util-hex-encoding-3.47.0.tgz}
+    name: '@aws-sdk/util-hex-encoding'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-locate-window/3.47.0:
+    resolution: {integrity: sha512-ptZQQNDG4++Za8EEVs43rmKPnjnIvOnX0QvLQ5cc4Opu28CdYJL89tTt3rq5o+DgQhC+E5rYuLLdqTekYXXxJg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-locate-window/-/util-locate-window-3.47.0.tgz}
+    name: '@aws-sdk/util-locate-window'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-uri-escape/3.47.0:
+    resolution: {integrity: sha512-4qxKb98t395h7dQWlD0iUMZpTH1JEPWdcNUCZtbVLwXy5lKzJOl4MPMwObdMhruMa9rgMEKwk6btaSzPK12KAw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-uri-escape/-/util-uri-escape-3.47.0.tgz}
+    name: '@aws-sdk/util-uri-escape'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-user-agent-browser/3.47.0:
+    resolution: {integrity: sha512-T0MHvvdt98aDGjSnW1wZU0rTtsA/6zr8735ZHTF6ObEH8ZQ28RPTtD0eWO5pUWfReU8yQxDXhBhJK41/lOOtSA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-user-agent-browser/-/util-user-agent-browser-3.47.0.tgz}
+    name: '@aws-sdk/util-user-agent-browser'
+    version: 3.47.0
+    dependencies:
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      bowser: registry.npmjs.org/bowser/2.11.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-user-agent-node/3.47.0:
+    resolution: {integrity: sha512-aGft3RuO8vQyTFMR5tn4WMtjsVMA9WiPx9WCloheieXmlO7gtez9qr51GFYteBQq9lfdiY9PPj4uaOG21efSIg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-user-agent-node/-/util-user-agent-node-3.47.0.tgz}
+    name: '@aws-sdk/util-user-agent-node'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/node-config-provider': registry.npmjs.org/@aws-sdk/node-config-provider/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-utf8-browser/3.47.0:
+    resolution: {integrity: sha512-qOYj00VqTVyUVb9gndS9yGHB/tRuK7EPGFvnhRh4VEkwVymH8ywyoFntRhWS/hSrrcQp0W35iS+fJPqdQ1nGWg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-utf8-browser/-/util-utf8-browser-3.47.0.tgz}
+    name: '@aws-sdk/util-utf8-browser'
+    version: 3.47.0
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-utf8-node/3.47.0:
+    resolution: {integrity: sha512-zbcF4zYPta/5tsogtRQ99uPyEB2WGaOyybRaS4cGPhtLiRdA/1wcwmld8ctEaCCf4m4wr2Vu6U9v3SnY92V55w==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-utf8-node/-/util-utf8-node-3.47.0.tgz}
+    name: '@aws-sdk/util-utf8-node'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/util-buffer-from': registry.npmjs.org/@aws-sdk/util-buffer-from/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/util-waiter/3.47.0:
+    resolution: {integrity: sha512-ED8Q7v8Z23NimTcPTK+VN2+NcTvVNLpm5+FzqCiXShZ6tM088e0fzwhyIVTejgbc0mvJE7QfEbR9ZSbr3a1zcw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/util-waiter/-/util-waiter-3.47.0.tgz}
+    name: '@aws-sdk/util-waiter'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      '@aws-sdk/abort-controller': registry.npmjs.org/@aws-sdk/abort-controller/3.47.0
+      '@aws-sdk/types': registry.npmjs.org/@aws-sdk/types/3.47.0
+      tslib: registry.npmjs.org/tslib/2.3.1
+    dev: false
+
+  registry.npmjs.org/@aws-sdk/xml-builder/3.47.0:
+    resolution: {integrity: sha512-C9929miRb1nb8oVUwQiQ42zCbC521qenCMUavyN921hnq1CUe9nLcBBzA6mHn4Vk3fz4orRHzx7vv91hPCZ3+Q==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@aws-sdk/xml-builder/-/xml-builder-3.47.0.tgz}
+    name: '@aws-sdk/xml-builder'
+    version: 3.47.0
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      tslib: registry.npmjs.org/tslib/2.3.1
     dev: false
 
   registry.npmjs.org/@babel/code-frame/7.16.0:
@@ -2413,6 +3381,21 @@ packages:
       '@teambit/legacy': 1.0.193
     dev: false
 
+  registry.npmjs.org/@teambit/webpack.modules.config-mutator/0.0.134:
+    resolution: {integrity: sha512-2i21Rk6bwsAgVrJNi2yCt7fss+uFIGxVU2rszXkWHNuTaoAYEBapyx/eDqE54bjED/phlLm/U+SYeHG5ylRc4g==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@teambit/webpack.modules.config-mutator/-/webpack.modules.config-mutator-0.0.134.tgz}
+    name: '@teambit/webpack.modules.config-mutator'
+    version: 0.0.134
+    engines: {node: '>=12.22.0'}
+    dependencies:
+      webpack: registry.npmjs.org/webpack/5.51.1
+      webpack-merge: registry.npmjs.org/webpack-merge/5.8.0
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+      - webpack-cli
+    dev: false
+
   registry.npmjs.org/@testing-library/dom/8.11.0:
     resolution: {integrity: sha512-8Ay4UDiMlB5YWy+ZvCeRyFFofs53ebxrWnOFvCoM1HpMAX4cHyuSrCuIM9l2lVuUWUt+Gr3loz/nCwdrnG6ShQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/@testing-library/dom/-/dom-8.11.0.tgz}
     name: '@testing-library/dom'
@@ -3507,6 +4490,12 @@ packages:
     version: 5.2.0
     dev: false
 
+  registry.npmjs.org/bowser/2.11.0:
+    resolution: {integrity: sha512-AlcaJBi/pqqJBIQ8U9Mcpc9i8Aqxn88Skv5d+xBX006BY5u8N3mGLHa5Lgppa7L/HfwgwLgZ6NYs+Ag6uUmJRA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/bowser/-/bowser-2.11.0.tgz}
+    name: bowser
+    version: 2.11.0
+    dev: false
+
   registry.npmjs.org/brace-expansion/1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/brace-expansion/-/brace-expansion-1.1.11.tgz}
     name: brace-expansion
@@ -3832,6 +4821,17 @@ packages:
       string-width: registry.npmjs.org/string-width/4.2.3
       strip-ansi: registry.npmjs.org/strip-ansi/6.0.1
       wrap-ansi: registry.npmjs.org/wrap-ansi/7.0.0
+    dev: false
+
+  registry.npmjs.org/clone-deep/4.0.1:
+    resolution: {integrity: sha512-neHB9xuzh/wk0dIHweyAXv2aPGZIVk3pLMe+/RNzINf17fe0OG96QroktYAUm7SM1PBnzTabaLboqqxDyMU+SQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/clone-deep/-/clone-deep-4.0.1.tgz}
+    name: clone-deep
+    version: 4.0.1
+    engines: {node: '>=6'}
+    dependencies:
+      is-plain-object: registry.npmjs.org/is-plain-object/2.0.4
+      kind-of: registry.npmjs.org/kind-of/6.0.3
+      shallow-clone: registry.npmjs.org/shallow-clone/3.0.1
     dev: false
 
   registry.npmjs.org/collapse-white-space/1.0.6:
@@ -4336,6 +5336,12 @@ packages:
       tapable: registry.npmjs.org/tapable/2.2.1
     dev: false
 
+  registry.npmjs.org/entities/2.2.0:
+    resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/entities/-/entities-2.2.0.tgz}
+    name: entities
+    version: 2.2.0
+    dev: false
+
   registry.npmjs.org/error-ex/1.3.2:
     resolution: {integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/error-ex/-/error-ex-1.3.2.tgz}
     name: error-ex
@@ -4370,6 +5376,12 @@ packages:
       string.prototype.trimend: registry.npmjs.org/string.prototype.trimend/1.0.4
       string.prototype.trimstart: registry.npmjs.org/string.prototype.trimstart/1.0.4
       unbox-primitive: registry.npmjs.org/unbox-primitive/1.0.1
+    dev: false
+
+  registry.npmjs.org/es-module-lexer/0.7.1:
+    resolution: {integrity: sha512-MgtWFl5No+4S3TmhDmCz2ObFGm6lEpTnzbQi+Dd+pw4mlTIZTmM2iAs5gRlmx5zS9luzobCSBSI90JM/1/JgOw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/es-module-lexer/-/es-module-lexer-0.7.1.tgz}
+    name: es-module-lexer
+    version: 0.7.1
     dev: false
 
   registry.npmjs.org/es-module-lexer/0.9.3:
@@ -4818,6 +5830,13 @@ packages:
     resolution: {integrity: sha512-dtm4QZH9nZtcDt8qJiOH9fcQd1NAgi+K1O2DbE6GG1PPCK/BWfOH3idCTRQ4ImXRUOyopDEgDEnVEE7Y/2Wrig==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/fast-text-encoding/-/fast-text-encoding-1.0.3.tgz}
     name: fast-text-encoding
     version: 1.0.3
+    dev: false
+
+  registry.npmjs.org/fast-xml-parser/3.19.0:
+    resolution: {integrity: sha512-4pXwmBplsCPv8FOY1WRakF970TjNGnGnfbOnLqjlYvMiF1SR3yOHyxMR/YCXpPTOspNF5gwudqktIP4VsWkvBg==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/fast-xml-parser/-/fast-xml-parser-3.19.0.tgz}
+    name: fast-xml-parser
+    version: 3.19.0
+    hasBin: true
     dev: false
 
   registry.npmjs.org/fast-xml-parser/3.21.1:
@@ -7609,6 +8628,15 @@ packages:
       safe-buffer: registry.npmjs.org/safe-buffer/5.1.2
     dev: false
 
+  registry.npmjs.org/shallow-clone/3.0.1:
+    resolution: {integrity: sha512-/6KqX+GVUdqPuPPd2LxDDxzX6CAbjJehAAOKlNpqqUpAqPM6HeL8f+o3a+JsyGjn2lv0WY8UsTgUJjU9Ok55NA==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/shallow-clone/-/shallow-clone-3.0.1.tgz}
+    name: shallow-clone
+    version: 3.0.1
+    engines: {node: '>=8'}
+    dependencies:
+      kind-of: registry.npmjs.org/kind-of/6.0.3
+    dev: false
+
   registry.npmjs.org/side-channel/1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/side-channel/-/side-channel-1.0.4.tgz}
     name: side-channel
@@ -7941,6 +8969,35 @@ packages:
     name: tapable
     version: 2.2.1
     engines: {node: '>=6'}
+    dev: false
+
+  registry.npmjs.org/terser-webpack-plugin/5.3.0_acorn@8.7.0+webpack@5.51.1:
+    resolution: {integrity: sha512-LPIisi3Ol4chwAaPP8toUJ3L4qCM1G0wao7L3qNv57Drezxj6+VEyySpPw4B1HSO2Eg/hDY/MNF5XihCAoqnsQ==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/terser-webpack-plugin/-/terser-webpack-plugin-5.3.0.tgz}
+    id: registry.npmjs.org/terser-webpack-plugin/5.3.0
+    name: terser-webpack-plugin
+    version: 5.3.0
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      '@swc/core': '*'
+      esbuild: '*'
+      uglify-js: '*'
+      webpack: ^5.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      esbuild:
+        optional: true
+      uglify-js:
+        optional: true
+    dependencies:
+      jest-worker: registry.npmjs.org/jest-worker/27.4.6
+      schema-utils: registry.npmjs.org/schema-utils/3.1.1
+      serialize-javascript: registry.npmjs.org/serialize-javascript/6.0.0
+      source-map: registry.npmjs.org/source-map/0.6.1
+      terser: registry.npmjs.org/terser/5.10.0_acorn@8.7.0
+      webpack: registry.npmjs.org/webpack/5.51.1
+    transitivePeerDependencies:
+      - acorn
     dev: false
 
   registry.npmjs.org/terser-webpack-plugin/5.3.0_acorn@8.7.0+webpack@5.65.0:
@@ -8400,11 +9457,63 @@ packages:
     version: 3.0.1
     dev: false
 
+  registry.npmjs.org/webpack-merge/5.8.0:
+    resolution: {integrity: sha512-/SaI7xY0831XwP6kzuwhKWVKDP9t1QY1h65lAFLbZqMPIuYcD9QAW4u9STIbU9kaJbPBB/geU/gLr1wDjOhQ+Q==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/webpack-merge/-/webpack-merge-5.8.0.tgz}
+    name: webpack-merge
+    version: 5.8.0
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      clone-deep: registry.npmjs.org/clone-deep/4.0.1
+      wildcard: registry.npmjs.org/wildcard/2.0.0
+    dev: false
+
   registry.npmjs.org/webpack-sources/3.2.2:
     resolution: {integrity: sha512-cp5qdmHnu5T8wRg2G3vZZHoJPN14aqQ89SyQ11NpGH5zEMDCclt49rzo+MaRazk7/UeILhAI+/sEtcM+7Fr0nw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/webpack-sources/-/webpack-sources-3.2.2.tgz}
     name: webpack-sources
     version: 3.2.2
     engines: {node: '>=10.13.0'}
+    dev: false
+
+  registry.npmjs.org/webpack/5.51.1:
+    resolution: {integrity: sha512-xsn3lwqEKoFvqn4JQggPSRxE4dhsRcysWTqYABAZlmavcoTmwlOb9b1N36Inbt/eIispSkuHa80/FJkDTPos1A==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/webpack/-/webpack-5.51.1.tgz}
+    name: webpack
+    version: 5.51.1
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+    dependencies:
+      '@types/eslint-scope': registry.npmjs.org/@types/eslint-scope/3.7.2
+      '@types/estree': registry.npmjs.org/@types/estree/0.0.50
+      '@webassemblyjs/ast': registry.npmjs.org/@webassemblyjs/ast/1.11.1
+      '@webassemblyjs/wasm-edit': registry.npmjs.org/@webassemblyjs/wasm-edit/1.11.1
+      '@webassemblyjs/wasm-parser': registry.npmjs.org/@webassemblyjs/wasm-parser/1.11.1
+      acorn: registry.npmjs.org/acorn/8.7.0
+      acorn-import-assertions: registry.npmjs.org/acorn-import-assertions/1.8.0_acorn@8.7.0
+      browserslist: registry.npmjs.org/browserslist/4.18.1
+      chrome-trace-event: registry.npmjs.org/chrome-trace-event/1.0.3
+      enhanced-resolve: registry.npmjs.org/enhanced-resolve/5.8.3
+      es-module-lexer: registry.npmjs.org/es-module-lexer/0.7.1
+      eslint-scope: registry.npmjs.org/eslint-scope/5.1.1
+      events: registry.npmjs.org/events/3.3.0
+      glob-to-regexp: registry.npmjs.org/glob-to-regexp/0.4.1
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
+      json-parse-better-errors: registry.npmjs.org/json-parse-better-errors/1.0.2
+      loader-runner: registry.npmjs.org/loader-runner/4.2.0
+      mime-types: registry.npmjs.org/mime-types/2.1.34
+      neo-async: registry.npmjs.org/neo-async/2.6.2
+      schema-utils: registry.npmjs.org/schema-utils/3.1.1
+      tapable: registry.npmjs.org/tapable/2.2.1
+      terser-webpack-plugin: registry.npmjs.org/terser-webpack-plugin/5.3.0_acorn@8.7.0+webpack@5.51.1
+      watchpack: registry.npmjs.org/watchpack/2.3.1
+      webpack-sources: registry.npmjs.org/webpack-sources/3.2.2
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
     dev: false
 
   registry.npmjs.org/webpack/5.65.0:
@@ -8492,6 +9601,12 @@ packages:
     hasBin: true
     dependencies:
       isexe: registry.npmjs.org/isexe/2.0.0
+    dev: false
+
+  registry.npmjs.org/wildcard/2.0.0:
+    resolution: {integrity: sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==, registry: https://node.bit.dev/, tarball: https://registry.npmjs.org/wildcard/-/wildcard-2.0.0.tgz}
+    name: wildcard
+    version: 2.0.0
     dev: false
 
   registry.npmjs.org/workerpool/6.1.5:

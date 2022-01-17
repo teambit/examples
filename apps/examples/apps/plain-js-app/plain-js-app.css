@@ -10,16 +10,6 @@
   z-index: 1000;
   background: repeating-linear-gradient(#cfcfcf 1px, #0e0d0d 2px, #000000 5px);
   opacity: 0.15;
-  animation: flicker 0.1s infinite;
-}
-
-@keyframes flicker {
-  0% {
-    top: 0;
-  }
-  100% {
-    top: 2px;
-  }
 }
 
 .greeting {

@@ -1,15 +1,14 @@
 import { ApplicationType, DeployFn } from '@teambit/application';
 import { HtmlApp } from './html.application';
-import { Workspace } from '@teambit/workspace';
 import { WebpackMain } from '@teambit/webpack';
+import { S3Config } from './html.application';
 
 export type HtmlOptions = {
   // application name
   name: string;
   // paths to entry files
   entry: string[];
-  // deploy function (e.g, netlify, firebase, etc.)
-  deploy: DeployFn;
+  s3Config: S3Config;
 };
 
 export class HtmlAppType implements ApplicationType<HtmlOptions> {
@@ -19,8 +18,8 @@ export class HtmlAppType implements ApplicationType<HtmlOptions> {
     return new HtmlApp(
       options.name,
       options.entry,
-      options.deploy,
-      this.webpack
+      this.webpack,
+      options.s3Config
     );
   }
 }

@@ -14,7 +14,7 @@ export class HtmlMain {
     ApplicationMain,
     WebpackMain
   ]) {
-    application.registerAppType(new HtmlAppType('html-app', webpack));
+    application.registerAppType(new HtmlAppType('html-s3', webpack));
     return new HtmlMain();
   }
 }
