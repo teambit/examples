@@ -6,14 +6,12 @@ import { Port } from '@teambit/toolbox.network.get-port';
 import { Capsule } from '@teambit/isolator';
 import { ArtifactDefinition, BuildContext } from '@teambit/builder';
 import { AppBuildResult, DeployFn } from '@teambit/application';
-import webpackDevConfig from './webpack/webpack.dev.config';
-import webpackProdConfig from './webpack/webpack.prod.config';
+import webpackConfig from './webpack.config';
 
 export class HtmlApp implements Application {
   constructor(
     readonly name: string,
     readonly entry: string[],
-    readonly deploy: DeployFn,
     private webpack: WebpackMain
   ) {}
 
@@ -23,7 +21,7 @@ export class HtmlApp implements Application {
     // and the Webpack config mutators
     const devServer = this.webpack.createDevServer(
       this.getDevServerContext(context),
-      [this.createTransformer(webpackDevConfig)]
+      [this.createTransformer(webpackConfig)]
     );
 
     // Set an acceptable port range for the dev server
@@ -40,7 +38,7 @@ export class HtmlApp implements Application {
     // Webpack's default config for 'preview' (generate html, inject bundle, etc)
     const bundler = this.webpack.createPreviewBundler(
       this.getBundlerContext(context, capsule),
-      [this.createTransformer(webpackProdConfig)]
+      [this.createTransformer(webpackConfig)]
     );
     const bundlerResults = await bundler.run();
 
@@ -56,6 +54,8 @@ export class HtmlApp implements Application {
     });
     return appBuildResult;
   }
+
+  async deploy(context: DeployContext, capsule: Capsule): Promise<void> {}
 
   // generate a webpack transformer out of webpack config
   private createTransformer = (webpackConfig): WebpackConfigTransformer => {
