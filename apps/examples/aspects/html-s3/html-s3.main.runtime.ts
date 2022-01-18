@@ -1,12 +1,12 @@
 import { MainRuntime } from '@teambit/cli';
-import { HtmlAspect } from './html.aspect';
+import { HtmlS3Aspect } from './html-s3.aspect';
 import { ApplicationAspect, ApplicationMain } from '@teambit/application';
 // import { Workspace, WorkspaceAspect } from '@teambit/workspace';
 import { WebpackMain, WebpackAspect } from '@teambit/webpack';
-// import { HtmlApp } from './html.application';
-import { HtmlAppType } from './html.app-type';
+// import { HtmlS3App } from './html-s3.application';
+import { HtmlS3AppType } from './html-s3.app-type';
 
-export class HtmlMain {
+export class HtmlS3Main {
   static slots = [];
   static dependencies = [ApplicationAspect, WebpackAspect];
   static runtime = MainRuntime;
@@ -14,9 +14,9 @@ export class HtmlMain {
     ApplicationMain,
     WebpackMain
   ]) {
-    application.registerAppType(new HtmlAppType('html-s3', webpack));
-    return new HtmlMain();
+    application.registerAppType(new HtmlS3AppType('html-s3', webpack));
+    return new HtmlS3Main();
   }
 }
 
-HtmlAspect.addRuntime(HtmlMain);
+HtmlS3Aspect.addRuntime(HtmlS3Main);

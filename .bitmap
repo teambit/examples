@@ -17,8 +17,8 @@
         "rootDir": "demo/demo-ui/my-react-component"
     },
     "examples/apps/plain-js-app": {
-        "scope": "",
-        "version": "",
+        "scope": "teambit.apps",
+        "version": "0.0.1",
         "mainFile": "index.js",
         "rootDir": "apps/examples/apps/plain-js-app"
     },
@@ -52,11 +52,11 @@
         "mainFile": "index.ts",
         "rootDir": "react/examples/aspects/ext-react"
     },
-    "examples/aspects/html": {
-        "scope": "",
+    "examples/aspects/html-s3": {
+        "scope": "teambit.apps",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "apps/examples/aspects/html"
+        "rootDir": "apps/examples/aspects/html-s3"
     },
     "examples/aspects/my-artifacts-fetcher": {
         "scope": "",
@@ -100,13 +100,6 @@
         "version": "",
         "mainFile": "index.ts",
         "rootDir": "pipelines/examples/modules/my-task"
-    },
-    "examples/modules/s3-deploy": {
-        "scope": "",
-        "version": "",
-        "defaultScope": "company.apps",
-        "mainFile": "index.ts",
-        "rootDir": "apps/examples/modules/s3-deploy"
     },
     "$schema-version": "14.9.0"
 }

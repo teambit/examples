@@ -11,6 +11,9 @@
   // "teambit.pipelines/examples/aspects/aspect-my-task": {},
   // "teambit.pipelines/examples/aspects/my-artifacts-fetcher": {},
   "teambit.apps/examples/apps/plain-js-app": {},
+  "teambit.compilation/bundler": {
+    "dedicatedEnvDevServers": ["teambit.html/html"]
+  },
   "teambit.dependencies/dependency-resolver": {
     "packageManager": "teambit.dependencies/pnpm",
     "policy": {
@@ -70,16 +73,14 @@
       }
     },
     "packageManagerArgs": [],
-    "devFilePatterns": [
-      "**/*.spec.ts"
-    ],
+    "devFilePatterns": ["**/*.spec.ts"],
     "strictPeerDependencies": true,
     "installFromBitDevRegistry": true,
     "savePrefix": ""
   },
   "teambit.workspace/variants": {
     "{examples/apps/**}": {
-      "teambit.apps/examples/aspects/html": {}
+      "teambit.apps/examples/aspects/html-s3": {}
     },
     "{demo-ui/**}": {
       // "teambit.envs/examples/aspects/custom-env": {}

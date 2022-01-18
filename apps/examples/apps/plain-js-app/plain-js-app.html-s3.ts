@@ -1,5 +1,4 @@
-import { HtmlOptions } from '@teambit/apps.examples.aspects.html';
-import fs from 'fs';
+import { HtmlS3Options } from '@teambit/apps.examples.aspects.html-s3';
 
 const s3Config = {
   credentialsProfile: 'default',
@@ -7,7 +6,7 @@ const s3Config = {
   region: 'us-east-2',
 };
 
-const plainJS: HtmlOptions = {
+const plainJS: HtmlS3Options = {
   name: 'plain-js-app',
   entry: [require.resolve('./plain-js-app.app-root')],
   s3Config,

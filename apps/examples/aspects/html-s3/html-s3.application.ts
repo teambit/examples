@@ -21,7 +21,7 @@ export type S3Config = {
   credentialsProfile?: string;
 };
 
-export class HtmlApp implements Application {
+export class HtmlS3App implements Application {
   constructor(
     readonly name: string,
     readonly entry: string[],
@@ -34,9 +34,9 @@ export class HtmlApp implements Application {
   // Implement a dev server
   async run(context: AppContext): Promise<number> {
     // Create a dev server instance using the specific app's config (file entries, etc.),
-    // and the Webpack config mutators
     const devServer = this.webpack.createDevServer(
       this.getDevServerContext(context),
+      // change Webpack's default config for development using this transformer
       [this.createTransformer(webpackConfig)]
     );
 
@@ -46,12 +46,16 @@ export class HtmlApp implements Application {
     return port;
   }
 
+  // this method builds the app before it is deployed
+  // it is executed as part of the build pipeline
   async build(
     context: BuildContext,
     capsule: Capsule
   ): Promise<AppBuildResult> {
     // add Webpack 'path' property
     const absOutputPath = join(capsule.path, this.outputDir);
+    // wrap the webpack config with a 'config mutator' to modify it using a set of handy methods
+    // here, the bundle output path is configured to '/html-s3' instead of the generic '/public'
     const prodWebpackConfig = new WebpackConfigMutator(
       webpackConfig
     ).addTopLevel('output', {
@@ -61,10 +65,14 @@ export class HtmlApp implements Application {
     // Webpack's default config for 'preview' (generate html, inject bundle, etc)
     const bundler = this.webpack.createPreviewBundler(
       this.getBundlerContext(context, capsule),
+      // the 'raw' property holds the raw webpack config
       [this.createTransformer(prodWebpackConfig.raw)]
     );
     const bundlerResults = await bundler.run();
 
+    // select the relevant artifacts for this app's build and provide them with metadata
+    // these artifacts will be persisted in the Component version and available
+    // for the 'deploy' method (which is executed as part of the `tag` and `snap` pipelines)
     const artifacts: ArtifactDefinition[] = [
       {
         name: this.name,
@@ -78,6 +86,7 @@ export class HtmlApp implements Application {
     return appBuildResult;
   }
 
+  // deploy the build to an s3 bucket
   async deploy(context: DeployContext, capsule: Capsule): Promise<void> {
     const filePaths = this.getFilesToUpload(capsule);
     const objectsToUpload = this.mapFilesToObjects(filePaths);

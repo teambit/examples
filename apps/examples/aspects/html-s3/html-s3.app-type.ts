@@ -1,9 +1,9 @@
 import { ApplicationType, DeployFn } from '@teambit/application';
-import { HtmlApp } from './html.application';
+import { HtmlS3App } from './html-s3.application';
 import { WebpackMain } from '@teambit/webpack';
-import { S3Config } from './html.application';
+import { S3Config } from './html-s3.application';
 
-export type HtmlOptions = {
+export type HtmlS3Options = {
   // application name
   name: string;
   // paths to entry files
@@ -11,11 +11,11 @@ export type HtmlOptions = {
   s3Config: S3Config;
 };
 
-export class HtmlAppType implements ApplicationType<HtmlOptions> {
+export class HtmlS3AppType implements ApplicationType<HtmlS3Options> {
   constructor(readonly name: string, readonly webpack: WebpackMain) {}
 
-  createApp(options: HtmlOptions) {
-    return new HtmlApp(
+  createApp(options: HtmlS3Options) {
+    return new HtmlS3App(
       options.name,
       options.entry,
       this.webpack,

@@ -1,5 +1,3 @@
-import { Configuration } from 'webpack';
-
 export const webpackConfig: any = {
   module: {
     rules: [
