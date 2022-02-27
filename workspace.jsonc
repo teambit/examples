@@ -6,11 +6,11 @@
     "defaultDirectory": "{scope}/{name}",
     "defaultScope": "company.examples"
   },
-  // "teambit.pipelines/examples/aspects/aspect-loc-stats": {},
+  "teambit.pipelines/examples/aspects/aspect-loc-stats": {},
   // "teambit.component/examples/extensions/my-dev-files": {},
   // "teambit.pipelines/examples/aspects/aspect-my-task": {},
   // "teambit.pipelines/examples/aspects/my-artifacts-fetcher": {},
-  "teambit.apps/examples/apps/plain-js-app": {},
+  // "teambit.apps/examples/apps/plain-js-app": {},
   "teambit.compilation/bundler": {
     "dedicatedEnvDevServers": ["teambit.html/html"]
   },

@@ -16,12 +16,6 @@
         "mainFile": "index.ts",
         "rootDir": "demo/demo-ui/my-react-component"
     },
-    "examples/apps/plain-js-app": {
-        "scope": "teambit.apps",
-        "version": "0.0.1",
-        "mainFile": "index.js",
-        "rootDir": "apps/examples/apps/plain-js-app"
-    },
     "examples/apsects/loc-stats": {
         "scope": "",
         "version": "",
@@ -52,12 +46,6 @@
         "mainFile": "index.ts",
         "rootDir": "react/examples/aspects/ext-react"
     },
-    "examples/aspects/html-s3": {
-        "scope": "teambit.apps",
-        "version": "0.0.1",
-        "mainFile": "index.ts",
-        "rootDir": "apps/examples/aspects/html-s3"
-    },
     "examples/aspects/my-artifacts-fetcher": {
         "scope": "",
         "version": "0.0.1",
@@ -81,13 +69,6 @@
         "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "pipelines/examples/aspects/react-loc-stats"
-    },
-    "examples/modules/firebase-deploy": {
-        "scope": "",
-        "version": "0.0.1",
-        "defaultScope": "teambit.apps",
-        "mainFile": "index.ts",
-        "rootDir": "apps/examples/modules/firebase-deploy"
     },
     "examples/modules/loc-stats": {
         "scope": "teambit.pipelines",
